@@ -18,5 +18,10 @@ class Instagain <Sinatra::Base
     erb :signup
   end
 
+  post '/signup' do
+    params[:]
+    erb: signup
+  end
+
 
 end
