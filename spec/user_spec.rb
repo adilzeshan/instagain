@@ -1,4 +1,4 @@
-require 'user.rb'
+require_relative  '../instagain.rb'
 
 describe User do
   let (:user){User.create(first: 'Kips',last: 'Davenport',user_name: 'xyz123')}
