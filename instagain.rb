@@ -18,10 +18,25 @@ class Instagain <Sinatra::Base
     erb :signup
   end
 
-  post '/signup' do
-    params[:]
-    erb: signup
+
+
+
+
+  get '/login' do
+    @title = 'Login'
+    erb :login
   end
+
+  post '/login' do
+    @user = User.login params[:user_name], params[:password]
+    if @user
+      erb :success, locals: { action: 'Logged in' }
+    else
+      erb :error
+    end
+  end
+
+
 
 
 end
