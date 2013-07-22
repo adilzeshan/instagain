@@ -13,4 +13,10 @@ class Instagain <Sinatra::Base
     erb :home
   end
 
+  get '/signup' do
+    @title = "Signup"
+    erb :signup
+  end
+
+
 end
