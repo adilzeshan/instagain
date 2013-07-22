@@ -1,9 +1,19 @@
  <div class="masthead">
-        <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="/login">Login</a></li>
-          <li><a href="/signup">Signup</a></li>
-        </ul>
+        <% if @logged_in == true %>
+          <ul class="nav nav-pills pull-right">
+            <li class="active"><a href="/profile">Profile</a></li>
+            <li><a href="/reset">Logout</a></li>
+          </ul>
+        <% else %>
+          <ul class="nav nav-pills pull-right">
+            <li class="active"><a href="/signin">Login</a></li>
+            <li><a href="/signup">Signup</a></li>
+          </ul>
+        <% end %>
         <h3 class="muted"><%= @title %></h3>
+        <% if @logged_in == true %>
+          <h4 class="muted">Hi, <%= @name %></h4>
+        <% end %>
       </div>
       <hr>
 <!--       <div class="jumbotron">

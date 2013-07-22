@@ -7,21 +7,23 @@ class User
     property :first,                  String, :required => true
     property :last,                   String, :required => true
     property :user_name,              String, :required => true, :unique => true
-    property :hashed_password,   String, length: 255
+    property :email,                  String, length: 255
+    property :hashed_password,        String, length: 255
 
 
-  def self.login(email, pwd)
+  def self.login(username, pwd)
     hashed = Digest::SHA256.hexdigest '**123SALTY**' + pwd
 
-    first(username: username, hashed_password: hashed)
+    first(user_name: username, hashed_password: hashed)
   end
+
 
   def password=(pwd)
     self.hashed_password = Digest::SHA256.hexdigest '**123SALTY**' + pwd
   end
 
   def get_full_name
-    first+" "+last
+    first.capitalize+" "+last.capitalize
   end
 
   def change_name(full_name)
