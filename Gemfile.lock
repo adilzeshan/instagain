@@ -73,4 +73,5 @@ PLATFORMS
 DEPENDENCIES
   data_mapper
   dm-postgres-adapter
+  json
   rspec

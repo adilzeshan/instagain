@@ -1,0 +1,30 @@
+<!-- <ul>
+	<li id="fullname"></li>
+	<li id="username"></li>
+	<li id="emailaddress"></li>
+	<li id="password"></li>
+</ul> -->
+
+ <form action='/profile' class="form-signin" method="POST">
+        <input type="text" class="input-block-level" placeholder=<%= @first %> name = "first_name">
+        <input type="text" class="input-block-level" placeholder=<%= @last %> name = "last_name">
+        <input type="text" class="input-block-level" placeholder=<%= @username %> name = "user_name">
+        <input type="text" class="input-block-level" placeholder=<%= @email %> name = "email_address">
+        <input type="password" class="input-block-level" placeholder="*****" name = "password">
+        <button class="btn btn-large btn-primary" type="submit">Sign up</button>
+</form>
+
+
+<script type="text/javascript">
+var getProfile = function() {
+	jQuery.get("/profile_data", function(response) 
+	{
+		fullName = response.full_name;
+		console.log(fullName)
+		var fullNameElement = document.getElementById("fullname");
+		// fullNameElement.innerHTML = fullName;
+	});
+}
+getProfile();
+
+</script>

@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'json'
 require_relative 'db/database.rb'
 require_relative 'lib/user.rb'
 require_relative 'lib/photo.rb'
@@ -65,4 +66,26 @@ class Instagain <Sinatra::Base
       erb :error
     end
   end
+
+  get '/profile' do
+    @first = session[:user].first
+    @last = session[:user].last
+    @username = session[:user].user_name
+    @email = session[:user].email
+    erb :profile
+  end
+
+  post '/profile' do
+    @first = session[:user].first
+    erb :profile
+  end
+
+  get '/profile_data' do
+    content_type :json
+    {
+      full_name: "Adil Zeshan"
+      }.to_json
+  end
+
+
 end
