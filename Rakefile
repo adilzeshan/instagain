@@ -1,5 +1,5 @@
 require 'data_mapper'
-require './lib/user'
+require './instagain.rb'
 
 # begin
 #   require 'jasmine'

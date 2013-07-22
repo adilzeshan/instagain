@@ -7,8 +7,6 @@ class User
     property :last,                   String, :required => true
     property :user_name,              String, :required => true, :unique => true
 
-    DataMapper.finalize
-
   def get_full_name
     first+" "+last
   end

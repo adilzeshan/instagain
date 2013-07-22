@@ -4,7 +4,11 @@ class Photo
 
     property :id,                     Serial
     property :name,				      String
+    property :url,				  String
 
-   DataMapper.finalize
+
+	def change_name(new_name)
+	  self.name = new_name
+	end
+
 end
-
