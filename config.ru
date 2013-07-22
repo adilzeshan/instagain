@@ -1,0 +1,3 @@
+require './instagain'
+run Instagain
+
