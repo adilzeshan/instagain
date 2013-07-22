@@ -17,7 +17,6 @@ class User
     first(user_name: username, hashed_password: hashed)
   end
 
-
   def password=(pwd)
     self.hashed_password = Digest::SHA256.hexdigest '**123SALTY**' + pwd
   end
