@@ -34,4 +34,36 @@ class User
     self.first = full_name.split[0]
     self.last = full_name.split[1]
   end
+
+    class Link
+
+    include DataMapper::Resource
+
+    storage_names[:default] = 'people_links'
+
+    belongs_to :follower, 'User', :key => true
+    belongs_to :followed, 'User', :key => true
+
+  end
+
+  has n, :links_to_followed_people, 'User::Link', :child_key => [:follower_id]
+  has n, :links_to_followers, 'User::Link', :child_key => [:followed_id]
+
+  has n, :followed_people, self, 
+    :through => :links_to_followed_people, :via => :followed
+
+  has n, :followers, self,
+    :through => :links_to_followers, :via => :follower
+
+  def follow(others)
+    followed_people.concat(Array(others))
+    save
+    self
+  end
+
+  def unfollow(others)
+    links_to_followed_people.all(:followed => Array(others)).destroy!
+    reload
+    self
+  end
 end
