@@ -1,6 +1,7 @@
 require 'digest'
 
 class User
+  attr :first,:last,:user_name,:email
 
     include DataMapper::Resource
     property :id,                     Serial
@@ -19,6 +20,10 @@ class User
 
   def password=(pwd)
     self.hashed_password = Digest::SHA256.hexdigest '**123SALTY**' + pwd
+  end
+
+  def get_first(username)
+    first
   end
 
   def get_full_name

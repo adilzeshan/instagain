@@ -19,6 +19,12 @@ class Instagain <Sinatra::Base
     end
   end
 
+  helpers do
+    def get_db_user
+      User.first(user_name: session[:user_name])
+    end
+  end
+
   get '/reset' do
     session.clear
     redirect '/'
@@ -47,7 +53,6 @@ class Instagain <Sinatra::Base
                             password: params[:password]
                           })
       redirect '/signin'
-     ##erb :success, locals: { action: 'Registered' }
   end
 
   get '/signin' do
@@ -58,7 +63,6 @@ class Instagain <Sinatra::Base
   post '/signin' do
     @user = User.login(params[:user_name], params[:password])
     if @user
-      #erb :success, locals: { action: 'Logged in' }
       session[:user] = @user
       session[:user_name] = params[:user_name]
       redirect "/"
@@ -67,25 +71,35 @@ class Instagain <Sinatra::Base
     end
   end
 
-  get '/profile' do
-    @first = session[:user].first
-    @last = session[:user].last
-    @username = session[:user].user_name
-    @email = session[:user].email
-    erb :profile
-  end
-
   post '/profile' do
-    @first = session[:user].first
+    @user = User.update({
+      first: params[:first_name],
+      last: params[:last_name],
+      email: params[:email_address]
+      })
+    redirect '/profile'
+  end
+
+  get '/profile' do
+    @first =  get_db_user.first
+    @last = get_db_user.last
+    @usernm = session[:user_name]
+    @email = get_db_user.email
     erb :profile
   end
 
-  get '/profile_data' do
-    content_type :json
-    {
-      full_name: "Adil Zeshan"
-      }.to_json
-  end
+  # post '/profile_data' do
+  #   # content_type :json
+  #   # {
+  #   #   full_name: "Adil Zeshan"
+  #   #   }.to_json
+  #   @user = User.update({
+  #     first: params[:first_name],
+  #     last: params[:last_name],
+  #     user_name: params[:user_name],
+  #     email: params[:email_address]
+  #     })
 
+  # end
 
 end
