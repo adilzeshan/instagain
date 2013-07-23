@@ -1,7 +1,7 @@
 require 'digest'
 
 class User
-  attr :first,:last,:user_name,:email
+  attr :id,:first,:last,:user_name,:email
 
     include DataMapper::Resource
     property :id,                     Serial
@@ -11,6 +11,7 @@ class User
     property :email,                  String, length: 255
     property :hashed_password,        String, length: 255
 
+    has n, :photos
 
   def self.login(username, pwd)
     hashed = Digest::SHA256.hexdigest '**123SALTY**' + pwd

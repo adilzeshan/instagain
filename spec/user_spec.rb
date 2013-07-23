@@ -22,8 +22,8 @@ describe User do
     end
   end
   context 'database' do
-    it 'should be a database object' do
-
+    it 'should be able to return all my images' do
+      expect(get_user_photos("dp6ai")).to be_an Hash
     end
     xit 'should only be able to set a distinct username' do
 

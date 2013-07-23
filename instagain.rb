@@ -1,9 +1,15 @@
 require 'sinatra'
 require 'json'
+require 'dm-paperclip'
+
+APP_ROOT = File.expand_path(File.dirname(__FILE__))
+
 require_relative 'db/database.rb'
 require_relative 'lib/user.rb'
 require_relative 'lib/photo.rb'
-require_relative 'lib/follower.rb'
+
+
+
 DataMapper.finalize
 
 
@@ -24,6 +30,26 @@ class Instagain <Sinatra::Base
     def get_db_user
       User.first(user_name: session[:user_name])
     end
+
+    def get_user_photos(user)
+        Photo.all(user_id: user.id)
+    end
+
+    def get_all_photos
+        Photo.all
+    end
+    # def get_user_photo_title(user)
+    #     get_user_photos(user)[photo_file_name]
+    # end
+
+    def make_paperclip_mash(file_hash)
+      mash = Mash.new
+      mash['tempfile'] = file_hash[:tempfile]
+      mash['filename'] = file_hash[:filename]
+      mash['content_type'] = file_hash[:type]
+      mash['size'] = file_hash[:tempfile].size
+      mash
+    end
   end
 
   get '/reset' do
@@ -37,6 +63,7 @@ class Instagain <Sinatra::Base
     if @logged_in != false
       @name = session[:user].get_full_name
     end
+    @photos = get_all_photos
     erb :home
   end
 
@@ -82,25 +109,40 @@ class Instagain <Sinatra::Base
   end
 
   get '/profile' do
+    @title = "Profile"
+    @logged_in = login?
+    if @logged_in != false
+      @name = session[:user].get_full_name
+    end
+
     @first =  get_db_user.first
     @last = get_db_user.last
     @usernm = session[:user_name]
     @email = get_db_user.email
+    @photos = get_user_photos(session[:user])
+    #puts @photos.inspect
     erb :profile
   end
 
-  # post '/profile_data' do
-  #   # content_type :json
-  #   # {
-  #   #   full_name: "Adil Zeshan"
-  #   #   }.to_json
-  #   @user = User.update({
-  #     first: params[:first_name],
-  #     last: params[:last_name],
-  #     user_name: params[:user_name],
-  #     email: params[:email_address]
-  #     })
+  get '/upload' do
+    @title = "Instagain"
+    @logged_in = login?
+    if @logged_in != false
+      @name = session[:user].get_full_name
+    end
+    erb :upload
+  end
 
-  # end
+  post '/upload' do
+    #puts params[:photo][:tempfile].inspect
+    halt 409, "File seems to be emtpy" unless params[:photo][:tempfile].size > 0
+    @photo = Photo.new(
+            :photo => make_paperclip_mash(params[:photo]),
+            :user_id => session[:user].id
+            )
+    @photo.save
+    halt 409, "There were some errors processing your request...\n#{@photo.errors.inspect}" unless @photo.save
+    redirect '/profile'
+  end
 
 end

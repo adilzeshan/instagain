@@ -1,41 +1,22 @@
- <div class="masthead">
-        <% if @logged_in == true %>
-          <ul class="nav nav-pills pull-right">
-            <li class="active"><a href="/profile">Profile</a></li>
-            <li><a href="/reset">Logout</a></li>
-          </ul>
-        <% else %>
-          <ul class="nav nav-pills pull-right">
-            <li class="active"><a href="/signin">Login</a></li>
-            <li><a href="/signup">Signup</a></li>
-          </ul>
-        <% end %>
-        <h3 class="muted"><%= @title %></h3>
-        <% if @logged_in == true %>
-          <h4 class="muted">Hi, <%= @name %></h4>
-        <% end %>
-      </div>
-      <hr>
+
 <!--       <div class="jumbotron">
         <img src="images/test-image.jpg" alt="a garden" width="700" height="700">
       </div> -->
-      <hr>
       <div class="row">
         <div class="span12">
-          <h4>Subheading</h4>
-          <img src="images/test-image.jpg" alt="a garden" height="700">
-        </div>
-
-        <div class="span12">
-          <h4>Subheading</h4>
-          <img src="images/test-image.jpg" alt="a garden" height="700">
+          <div id="ri-grid" class="ri-grid ri-grid-size-3 ri-shadow">
+          <img class="ri-loading-image" src="images/loading.gif"/>
+            <ul>
+              <% @photos.each do |photo| %>
+                <li>
+                  <a href="#"><img src="<%= "/images/photos/"+photo.id.to_s+"/thumb/"+photo.photo_file_name %>" alt="<%= photo.photo_file_name %>">
+                  </a>
+                </li>
+              <% end %>
+            </ul>
+          </div>
         </div>
       </div>
-
       <hr>
 
-      <div class="footer">
-        <p>&copy; Instagain 2013</p>
-      </div>
 
-    </div>
