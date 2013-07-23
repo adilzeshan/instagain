@@ -3,19 +3,18 @@ require 'digest'
 class User
   attr :id,:first,:last,:user_name,:email
 
-    include DataMapper::Resource
-    property :id,                     Serial
-    property :first,                  String, :required => true
-    property :last,                   String, :required => true
-    property :user_name,              String, :required => true, :unique => true
-    property :email,                  String, length: 255
-    property :hashed_password,        String, length: 255
+  include DataMapper::Resource
+  property :id,                     Serial
+  property :first,                  String, :required => true
+  property :last,                   String, :required => true
+  property :user_name,              String, :required => true, :unique => true
+  property :email,                  String, length: 255
+  property :hashed_password,        String, length: 255
 
-    has n, :photos
+  has n, :photos
 
   def self.login(username, pwd)
     hashed = Digest::SHA256.hexdigest '**123SALTY**' + pwd
-
     first(user_name: username, hashed_password: hashed)
   end
 
@@ -36,21 +35,19 @@ class User
     self.last = full_name.split[1]
   end
 
-    class Link
+  class Link
 
-    include DataMapper::Resource
+  include DataMapper::Resource
+  storage_names[:default] = 'people_links'
 
-    storage_names[:default] = 'people_links'
-
-    belongs_to :follower, 'User', :key => true
-    belongs_to :followed, 'User', :key => true
-
+  belongs_to :follower, 'User', :key => true
+  belongs_to :followed, 'User', :key => true
   end
 
   has n, :links_to_followed_people, 'User::Link', :child_key => [:follower_id]
   has n, :links_to_followers, 'User::Link', :child_key => [:followed_id]
 
-  has n, :followed_people, self, 
+  has n, :followed_people, self,
     :through => :links_to_followed_people, :via => :followed
 
   has n, :followers, self,
@@ -67,4 +64,5 @@ class User
     reload
     self
   end
+
 end

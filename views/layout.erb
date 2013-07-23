@@ -18,7 +18,7 @@
   <body>
     <div class="container">
       <div class="masthead">
-          <% if @logged_in == true %>
+        <% if @logged_in == true %>
           <ul class="nav nav-pills pull-right">
             <li class="active"><a href="/">Home</a></li>
             <li class="active"><a href="/profile">Profile</a></li>
@@ -38,26 +38,22 @@
       </div>
       <hr>
       <%= yield %>
-     <div class="footer">
+      <hr>
+      <div class="footer">
         <p>&copy; Instagain 2013</p>
       </div>
-
     </div>
-    </div>
-   <script type="text/javascript" src="js/jquery.gridrotator.js"></script>
-        <script type="text/javascript">
+    <script type="text/javascript" src="js/jquery.gridrotator.js"></script>
+    <script type="text/javascript">
       $(function() {
-
-        $( '#ri-grid' ).gridrotator( {
-          rows: 1,
-          columns:1,
-          preventClick : false,
-          animType        : 'random',
-          onhover     : false
-        } );
-
+      $( '#ri-grid' ).gridrotator( {
+      rows: 1,
+      columns:1,
+      preventClick : false,
+      animType        : 'random',
+      onhover     : false
+      } );
       });
     </script>
-
   </body>
 </html>

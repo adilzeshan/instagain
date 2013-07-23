@@ -16,5 +16,5 @@ describe Photo do
 		photo.change_name 'Holiday2'
 		expect(photo.name).to eq 'Holiday2'
 	end
-	
+
 end

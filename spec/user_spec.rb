@@ -21,6 +21,7 @@ describe User do
       expect(user.get_full_name).to eq "Adil Zeshan"
     end
   end
+
   context 'database' do
     it 'should be able to return all my images' do
       expect(get_user_photos("dp6ai")).to be_an Hash
@@ -35,7 +36,6 @@ describe User do
       another_user = double :another_user
       user.follow another_user
     end
-
     it 'unfollow another user' do
       another_user = double :another_user
       user.unfollow another_user

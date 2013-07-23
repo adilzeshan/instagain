@@ -1,4 +1,3 @@
-
 class Photo
 	include DataMapper::Resource
   include Paperclip::Resource

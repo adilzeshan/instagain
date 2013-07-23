@@ -8,10 +8,7 @@ require_relative 'db/database.rb'
 require_relative 'lib/user.rb'
 require_relative 'lib/photo.rb'
 
-
-
 DataMapper.finalize
-
 
 class Instagain <Sinatra::Base
   enable :session
@@ -36,7 +33,6 @@ class Instagain <Sinatra::Base
       User.all.map {|user| user.user_name }
     end
 
-
     def get_user_photos(user)
         Photo.all(user_id: user.id)
     end
@@ -44,9 +40,6 @@ class Instagain <Sinatra::Base
     def get_all_photos
         Photo.all
     end
-    # def get_user_photo_title(user)
-    #     get_user_photos(user)[photo_file_name]
-    # end
 
     def make_paperclip_mash(file_hash)
       mash = Mash.new
@@ -80,13 +73,13 @@ class Instagain <Sinatra::Base
 
   post '/signup' do
     @user = User.create({
-                            first: params[:first_name],
-                            last: params[:last_name],
-                            user_name: params[:user_name],
-                            email: params[:email_address],
-                            password: params[:password]
-                          })
-      redirect '/signin'
+                        first: params[:first_name],
+                        last: params[:last_name],
+                        user_name: params[:user_name],
+                        email: params[:email_address],
+                        password: params[:password]
+                        })
+    redirect '/signin'
   end
 
   get '/users' do
@@ -94,7 +87,7 @@ class Instagain <Sinatra::Base
     content_type :json
       {
         allusers: @userArray
-        }.to_json
+      }.to_json
   end
 
   get '/signin' do
@@ -128,13 +121,11 @@ class Instagain <Sinatra::Base
     if @logged_in != false
       @name = session[:user].get_full_name
     end
-
     @first =  get_db_user.first
     @last = get_db_user.last
     @usernm = session[:user_name]
     @email = get_db_user.email
     @photos = get_user_photos(session[:user])
-    #puts @photos.inspect
     erb :profile
   end
 
@@ -148,7 +139,6 @@ class Instagain <Sinatra::Base
   end
 
   post '/upload' do
-    #puts params[:photo][:tempfile].inspect
     halt 409, "File seems to be emtpy" unless params[:photo][:tempfile].size > 0
     @photo = Photo.new(
             :photo => make_paperclip_mash(params[:photo]),
@@ -163,14 +153,11 @@ class Instagain <Sinatra::Base
     @followuser = User.first(user_name: params[:user])
     @me = get_db_user
     if @followuser
-      #puts @followuser
-      #puts @me
       @me.follow(@followuser)
     else
       "Couldn't find user #{params[:user]}"
     end
     redirect '/profile'
   end
-
 
 end
