@@ -12,6 +12,17 @@
     <div class="bs-docs">
       <h2>Following</h2>
     </div>
+
+  <div class="span4">
+    <div class="bs-docs">
+      <h2>TEMPORARY</h2>
+      <div id="templist">
+      </div>
+    </div>
+  </div>
+
+
+
   </div>
   <div class="span3">
     <div class="span3">
@@ -48,14 +59,29 @@
     </div>
   </div>
 </div>
-<!-- <h4>Subheading</h4>
-<img src="images/test-image.jpg" alt="a garden" height="700"> -->
+<script>
+// Create the users list...
+jQuery.get('/users', function(response){
+  var test=document.getElementById('templist');
+  var ul=document.createElement('ul');
+  test.appendChild(ul);
+
+  var userArray = response.allusers
+  console.log(userArray)
+  for (var i=0; i<userArray.length; i++)
+      {
+      var li=document.createElement('li');
+      ul.appendChild(li);
+      li.innerHTML="<a href='/follow/"+userArray[i]+"'>"+li.innerHTML + userArray[i]+"</a>";
+      }
+});
+
+// create a follower when the link is clicked
 
 
 
 
-<!--       <div class="jumbotron">
-<img src="images/test-image.jpg" alt="a garden" width="700" height="700">
-</div> -->
 
 
+
+</script>

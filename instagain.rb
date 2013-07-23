@@ -31,6 +31,12 @@ class Instagain <Sinatra::Base
       User.first(user_name: session[:user_name])
     end
 
+    def get_all_user_names
+      #User.all.map(&:user_name)
+      User.all.map {|user| user.user_name }
+    end
+
+
     def get_user_photos(user)
         Photo.all(user_id: user.id)
     end
@@ -81,6 +87,14 @@ class Instagain <Sinatra::Base
                             password: params[:password]
                           })
       redirect '/signin'
+  end
+
+  get '/users' do
+    @userArray = get_all_user_names
+    content_type :json
+      {
+        allusers: @userArray
+        }.to_json
   end
 
   get '/signin' do
@@ -144,5 +158,19 @@ class Instagain <Sinatra::Base
     halt 409, "There were some errors processing your request...\n#{@photo.errors.inspect}" unless @photo.save
     redirect '/profile'
   end
+
+  get '/follow/:user' do
+    @followuser = User.first(user_name: params[:user])
+    @me = get_db_user
+    if @followuser
+      #puts @followuser
+      #puts @me
+      @me.follow(@followuser)
+    else
+      "Couldn't find user #{params[:user]}"
+    end
+    redirect '/profile'
+  end
+
 
 end
