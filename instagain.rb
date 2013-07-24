@@ -33,8 +33,51 @@ class Instagain <Sinatra::Base
       User.all.map {|user| user.user_name }
     end
 
+    def get_all_users
+      #User.all.map(&:user_name)
+      User.all.map {|user| user }
+    end
+
+    def get_all_following_users
+      @me = get_db_user
+      @me.followed_users.map {|user| user }
+    end
+    def get_all_following_user_names
+      @me = get_db_user
+      @me.followed_users.map {|user| user.user_name }
+    end
+
+    def get_all_followed_users
+      @me = get_db_user
+      @me.followers.map {|user| user }
+    end
+
+    def get_all_followed_user_names
+      @me = get_db_user
+      @me.followers.map {|user| user.user_name }
+    end
+
+    def get_all_not_following_users
+      @me = get_db_user
+      get_all_users - get_all_following_users
+    end
+
+        def get_all_not_following_user_names
+      @me = get_db_user
+      get_all_user_names - get_all_following_user_names - [@me.user_name]
+
+    end
+
     def get_user_photos(user)
         Photo.all(user_id: user.id)
+    end
+
+    def get_following_users_photos
+      @photos =[]
+      get_all_following_users.each do |user|
+          @photos << Photo.all(user_id: user.id)
+      end
+      @photos
     end
 
     def get_all_photos
@@ -84,6 +127,7 @@ class Instagain <Sinatra::Base
 
   get '/users' do
     @userArray = get_all_user_names
+    @userArray.delete(get_db_user.user_name)
     content_type :json
       {
         allusers: @userArray
@@ -125,7 +169,12 @@ class Instagain <Sinatra::Base
     @last = get_db_user.last
     @usernm = session[:user_name]
     @email = get_db_user.email
-    @photos = get_user_photos(session[:user])
+    @myphotos = get_user_photos(session[:user])
+    @followingphotos = get_following_users_photos
+    #puts get_all_following_users
+    @following = get_all_following_user_names
+    @followed = get_all_followed_user_names
+    @not_following = get_all_not_following_user_names
     erb :profile
   end
 

@@ -3,7 +3,7 @@
   <div class="span4">
     <div class="bs-docs">
       <h2>My feed</h2>
-      <% @photos.first(5).each do |photo| %>
+      <% @myphotos.first(5).each do |photo| %>
         <a href="#"><img class="img-polaroid" src="<%= "/images/photos/"+photo.id.to_s+"/medium/"+photo.photo_file_name %>" alt="<%= photo.photo_file_name %>"></a>
       <% end %>
     </div>
@@ -11,16 +11,12 @@
   <div class="span4">
     <div class="bs-docs">
       <h2>Following</h2>
+      <% @followingphotos.first(5).each do |ph| %>
+        <% ph.each do |photo| %>
+        <a href="#"><img class="img-polaroid" src="<%= "/images/photos/"+photo.id.to_s+"/medium/"+photo.photo_file_name %>" alt="<%= photo.photo_file_name %>"></a>
+        <% end %>
+      <% end %>
     </div>
-
-  <div class="span4">
-    <div class="bs-docs">
-      <h2>TEMPORARY</h2>
-      <div id="templist">
-      </div>
-    </div>
-  </div>
-
   </div>
   <div class="span3">
     <div class="span3">
@@ -35,12 +31,24 @@
     </div>
     <div class="span3">
       <div class="bs-docs">
+        <h2 class="text-info" >Not Following:</h2>
+        <div id="templist">
+        <ul>
+          <% @not_following.each do |user| %>
+            <a onClick="window.location.reload( true );" href="/follow/<%= user %>"><li><%= user %></li></a>
+          <% end %>
+        </ul>
+
+        </div>
+      </div>
+    </div>
+    <div class="span3">
+      <div class="bs-docs">
         <h2 class="text-info" >Following:</h2>
         <ul>
-          <li>user1</li>
-          <li>user2</li>
-          <li>user3</li>
-          <li>user4</li>
+        <% @following.each do |user| %>
+          <a href="#"><li><%= user %></li></a>
+        <% end %>
         </ul>
       </div>
     </div>
@@ -48,29 +56,27 @@
       <div class="bs-docs">
         <h2 class="text-info">Followers:</h2>
         <ul>
-          <li>user5</li>
-          <li>user6</li>
-          <li>user7</li>
-          <li>user8</li>
-        </ul>
+        <% @followed.each do |user| %>
+        <a href="#"><li><%= user %></li></a>
+      <% end %>        </ul>
       </div>
     </div>
   </div>
 </div>
 <script>
 // Create the users list...
-jQuery.get('/users', function(response){
-  var test=document.getElementById('templist');
-  var ul=document.createElement('ul');
-  test.appendChild(ul);
+// jQuery.get('/users', function(response){
+//   var test=document.getElementById('templist');
+//   var ul=document.createElement('ul');
+//   test.appendChild(ul);
 
-  var userArray = response.allusers
-  console.log(userArray)
-  for (var i=0; i<userArray.length; i++)
-      {
-      var li=document.createElement('li');
-      ul.appendChild(li);
-      li.innerHTML="<a href='/follow/"+userArray[i]+"'>"+li.innerHTML + userArray[i]+"</a>";
-      }
-});
+//   var userArray = response.allusers
+//   console.log(userArray)
+//   for (var i=0; i<userArray.length; i++)
+//       {
+//       var li=document.createElement('li');
+//       ul.appendChild(li);
+//       li.innerHTML="<a href='/follow/"+userArray[i]+"'>"+li.innerHTML + userArray[i]+"</a>";
+//       }
+// });
 </script>
