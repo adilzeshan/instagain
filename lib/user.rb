@@ -68,5 +68,4 @@ class User
   def get_followers
     followers
   end
-
 end

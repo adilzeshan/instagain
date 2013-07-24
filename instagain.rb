@@ -28,6 +28,10 @@ class Instagain <Sinatra::Base
       User.first(user_name: session[:user_name])
     end
 
+    def get_other_user(username)
+      User.first(user_name: username)
+    end
+
     def get_all_user_names
       #User.all.map(&:user_name)
       User.all.map {|user| user.user_name }
@@ -42,9 +46,13 @@ class Instagain <Sinatra::Base
       @me = get_db_user
       @me.followed_users.map {|user| user }
     end
-    def get_all_following_user_names
-      @me = get_db_user
+    def get_all_following_user_names(me = get_db_user())
+      @me = me
       @me.followed_users.map {|user| user.user_name }
+    end
+
+    def get_all_following_user_names_
+      
     end
 
     def get_all_followed_users
@@ -52,8 +60,8 @@ class Instagain <Sinatra::Base
       @me.followers.map {|user| user }
     end
 
-    def get_all_followed_user_names
-      @me = get_db_user
+    def get_all_followed_user_names(me = get_db_user())
+      @me = me
       @me.followers.map {|user| user.user_name }
     end
 
@@ -62,8 +70,8 @@ class Instagain <Sinatra::Base
       get_all_users - get_all_following_users
     end
 
-        def get_all_not_following_user_names
-      @me = get_db_user
+        def get_all_not_following_user_names(me = get_db_user())
+      @me = me
       get_all_user_names - get_all_following_user_names - [@me.user_name]
 
     end
@@ -178,6 +186,24 @@ class Instagain <Sinatra::Base
     erb :profile
   end
 
+  get '/profile/:user' do
+    @other_user_name = params[:user]
+    @title = "#{@other_user_name}'s profile"
+    @logged_in = login?
+    if @logged_in != false
+      @name = session[:user].get_full_name
+    end
+    # @first =  User.first(user_name: @other_user_name)
+    # @last = User.last(user_name: @other_user_name)
+    # @email = User.email(user_name: @other_user_name)
+    @their_photos = get_user_photos(get_other_user(@other_user_name))
+    @following = get_all_following_user_names(get_other_user(@other_user_name))
+    @followed = get_all_followed_user_names(get_other_user(@other_user_name))
+    @not_following = get_all_not_following_user_names(get_other_user(@other_user_name))
+
+    erb :other_profile
+  end
+
   get '/upload' do
     @title = "Instagain"
     @logged_in = login?
@@ -208,5 +234,4 @@ class Instagain <Sinatra::Base
     end
     redirect '/profile'
   end
-
 end

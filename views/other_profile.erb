@@ -2,33 +2,27 @@
 <div class="row">
   <div class="span4">
     <div class="bs-docs">
-      <h2>My feed</h2>
-      <% @myphotos.first(5).each do |photo| %>
+      <h2><%=@other_user_name+"\'s"%> feed</h2>
+      <% @their_photos.first(5).each do |photo| %>
         <a href="#"><img class="img-polaroid" src="<%= "/images/photos/"+photo.id.to_s+"/medium/"+photo.photo_file_name %>" alt="<%= photo.photo_file_name %>"></a>
       <% end %>
     </div>
   </div>
-  <div class="span4">
+<!--   <div class="span4">
     <div class="bs-docs">
-      <h2>Following</h2>
-      <% @followingphotos.first(5).each do |ph| %>
-        <% ph.each do |photo| %>
-        <a href="#"><img class="img-polaroid" src="<%= "/images/photos/"+photo.id.to_s+"/medium/"+photo.photo_file_name %>" alt="<%= photo.photo_file_name %>"></a>
-        <% end %>
-      <% end %>
     </div>
-  </div>
+  </div> -->
   <div class="span3">
-    <div class="span3">
+<!--     <div class="span3">
       <div class="bs-docs">
-        <form action='/profile' class="form-signin" method="POST">
+        <form action='/profile/<%= @usernm %>' class="form-signin" method="POST">
           <input type="text" id="firstname" class="input-block-level" value="<%= @first %>" name="first_name">
           <input type="text" id="lastname"  class="input-block-level" value=<%= @last %> name = "last_name">
           <input type="text" id="email"  class="input-block-level" value=<%= @email %> name = "email_address">
           <button class="btn btn-large btn-primary" type="submit">Update</button>
         </form>
       </div>
-    </div>
+    </div> -->
     <div class="span3">
       <div class="bs-docs">
         <h2 class="text-info" >Not Following:</h2>
@@ -62,20 +56,3 @@
     </div>
   </div>
 </div>
-<script>
-// Create the users list...
-// jQuery.get('/users', function(response){
-//   var test=document.getElementById('templist');
-//   var ul=document.createElement('ul');
-//   test.appendChild(ul);
-
-//   var userArray = response.allusers
-//   console.log(userArray)
-//   for (var i=0; i<userArray.length; i++)
-//       {
-//       var li=document.createElement('li');
-//       ul.appendChild(li);
-//       li.innerHTML="<a href='/follow/"+userArray[i]+"'>"+li.innerHTML + userArray[i]+"</a>";
-//       }
-// });
-</script>
