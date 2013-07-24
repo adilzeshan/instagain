@@ -61,8 +61,8 @@
         <h2 class="text-info">Followers:</h2>
         <ul class="unstyled">
         <% @followed.each do |user| %>
-            <li>
-              <a  onClick="window.location.reload( true);" href="profile/<%= user %>"><%= user %></a>
+            <li><%=user %> - 
+              <a  onClick="window.location.reload( true);" href="profile/<%= user %>">details</a>
             </li>
           <% end %>        
         </ul>
