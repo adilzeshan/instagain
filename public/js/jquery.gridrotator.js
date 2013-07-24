@@ -117,7 +117,7 @@
 		rows : 4,
 		// number of columns
 		columns : 10,
-		w1024 : { rows : 2, columns : 8 },
+		w1024 : { rows : 5, columns : 8 },
 		w768 : {rows : 3,columns : 7 },
 		w480 : {rows : 3,columns : 5 },
 		w320 : {rows : 2,columns : 4 },

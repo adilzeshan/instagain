@@ -1,17 +1,39 @@
 
 <div class="row">
-  <div class="span4">
+  <div class="span8">
     <div class="bs-docs">
       <h3><%=@other_user_name+"\'s"%> feed</h3>
-      <% @their_photos.first(5).each do |photo| %>
+      <div class="others-feed">
+      <% @their_photos.first(10).each do |photo| %>
+      <div class="medium-photo other" data-user="<%= photo.user.user_name %>">
         <a href="#"><img class="img-polaroid" src="<%= "/images/photos/"+photo.id.to_s+"/medium/"+photo.photo_file_name %>" alt="<%= photo.photo_file_name %>"></a>
+       <div class="label">
+        <strong class="name"><%= photo.user.user_name %></strong>
+        <a class="follow" onclick="window.location.reload( true );" href="/follow/<%= photo.user.user_name %>">follow</a>
+        <a class="profile" onclick="window.location.reload( true );" href="/profile/<%= photo.user.user_name %>">details</a></div>
+      </div>
       <% end %>
     </div>
-  </div>
-<!--   <div class="span4">
-    <div class="bs-docs">
+
+
+    <div class="others-feed">
+      <% @their_photos.last(10).each do |photo| %>
+      <div class="medium-photo other" data-user="<%= photo.user.user_name %>">
+        <a href="#"><img class="img-polaroid" src="<%= "/images/photos/"+photo.id.to_s+"/medium/"+photo.photo_file_name %>" alt="<%= photo.photo_file_name %>"></a>
+       <div class="label">
+        <strong class="name"><%= photo.user.user_name %></strong>
+        <a class="follow" onclick="window.location.reload( true );" href="/follow/<%= photo.user.user_name %>">follow</a>
+        <a class="profile" onclick="window.location.reload( true );" href="/profile/<%= photo.user.user_name %>">details</a></div>
+      </div>
+      <% end %>
     </div>
-  </div> -->
+
+
+
+
+    </div>
+  </div>
+
   <div class="span3">
 <!--     <div class="span3">
       <div class="bs-docs">
@@ -56,3 +78,39 @@
     </div>
   </div>
 </div>
+
+
+<script>
+// Create the label for the photos
+
+//   // @myphotos.map{|photo| photo.user.user_name.inspect}
+// var setLabel = function(){
+//   var user = $(this).data('user')
+
+//   var photoDivs = $('.medium-photo');
+//   var name = "<Strong class='name'>"+user+"</strong>";
+//   var follow = "<a class='follow' onClick='window.location.reload( true );' href='/follow/"+user+"'>follow</a>";
+//   var profile = "<a class='profile' onClick='window.location.reload( true );' href='/profile/"+user+"'>profile</a>";
+//   var label = "<div class='label'>"+name+follow+profile+"</div>"
+//   //console.log(follow)
+
+//   photoDivs.each(function(index, photo){
+//     $(photo).append(label);
+//   })
+// }
+// var removeLabel = function()
+// {
+//   var labels = $('.label');
+//   //console.log(labels)
+//   // labels.each(function(index, divie){
+//   //   divie.parentNode.removeChild(divie);
+//   // })
+//   labels.remove();
+// }
+
+// //jQuery(".medium-photo").on('mouseover', setLabel);
+// //jQuery(".medium-photo").one('mouseover', setLabel);
+// //jQuery(".medium-photo").on('mouseout', removeLabel);
+
+
+</script>

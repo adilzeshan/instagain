@@ -51,10 +51,6 @@ class Instagain <Sinatra::Base
       @me.followed_users.map {|user| user.user_name }
     end
 
-    def get_all_following_user_names_
-
-    end
-
     def get_all_followed_users
       @me = get_db_user
       @me.followers.map {|user| user }
@@ -77,19 +73,19 @@ class Instagain <Sinatra::Base
     end
 
     def get_user_photos(user)
-        Photo.all(user_id: user.id)
+        Photo.all(user_id: user.id,:order => [ :photo_updated_at.desc ]     )
     end
 
     def get_following_users_photos
       @photos =[]
       get_all_following_users.each do |user|
-          @photos << Photo.all(user_id: user.id)
+          @photos << Photo.all(user_id: user.id, :order => [ :photo_updated_at.desc ]  )
       end
       @photos
     end
 
     def get_all_photos
-        Photo.all
+        Photo.all(:order => [ :photo_file_name.desc ]  )
     end
 
     def make_paperclip_mash(file_hash)
@@ -188,6 +184,10 @@ class Instagain <Sinatra::Base
 
   get '/profile/:user' do
     @other_user_name = params[:user]
+    if @other_user_name == get_db_user.user_name
+      redirect '/profile'
+    end
+
     @title = "#{@other_user_name}'s profile"
     @logged_in = login?
     if @logged_in != false
@@ -246,6 +246,15 @@ class Instagain <Sinatra::Base
     redirect '/profile'
   end
 
-
+  get '/delete/:photo' do
+    @photo = Photo.first(id: params[:photo])
+    puts @photo.inspect
+    if @photo
+      @photo.destroy()
+    else
+      "Photo #{params[:photo]} does not exist"
+    end
+    redirect '/profile'
+  end
 
 end
