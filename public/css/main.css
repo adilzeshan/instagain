@@ -1,0 +1,50 @@
+#main {
+    width:256px;
+    height:256px;
+}
+.overlay {
+  height:100px;
+   width:100px;
+   top:0;
+   left:0;
+}
+.label{
+  top: -20px;
+  margin-bottom:-20px;
+  width:100%;
+}
+.label > * {
+display: inline-block;
+width: 33%;
+}
+strong.name{
+  text-align:left;
+
+}
+a.follow{
+  text-align:center;
+
+}
+a.profile{
+  text-align:right;
+
+}
+
+
+.medium-photo{
+    opacity: .8;
+    margin-bottom: 20px;
+}
+
+.medium-photo > a {
+  display: block;
+  margin-bottom: -20px;
+}
+
+.label {
+  visibility: hidden;
+}
+
+.medium-photo:hover .label {
+    visibility: visible;
+}

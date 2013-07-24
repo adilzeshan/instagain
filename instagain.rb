@@ -103,7 +103,7 @@ class Instagain <Sinatra::Base
     @title = "Instagain"
     @logged_in = login?
     if @logged_in != false
-      @name = session[:user].get_full_name
+      @name = get_db_user.get_full_name
     end
     @photos = get_all_photos
     erb :home
@@ -163,7 +163,7 @@ class Instagain <Sinatra::Base
     @title = "Profile"
     @logged_in = login?
     if @logged_in != false
-      @name = session[:user].get_full_name
+      @name = get_db_user.get_full_name
     end
     @first =  get_db_user.first
     @last = get_db_user.last
@@ -182,7 +182,7 @@ class Instagain <Sinatra::Base
     @title = "Instagain"
     @logged_in = login?
     if @logged_in != false
-      @name = session[:user].get_full_name
+      @name = get_db_user.get_full_name
     end
     erb :upload
   end
