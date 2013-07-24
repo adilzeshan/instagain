@@ -52,7 +52,7 @@ class Instagain <Sinatra::Base
     end
 
     def get_all_following_user_names_
-      
+
     end
 
     def get_all_followed_users
@@ -234,4 +234,18 @@ class Instagain <Sinatra::Base
     end
     redirect '/profile'
   end
+
+  get '/unfollow/:user' do
+    @followuser = User.first(user_name: params[:user])
+    @me = get_db_user
+    if @followuser
+      @me.unfollow(@followuser)
+    else
+      "Couldn't find user #{params[:user]}"
+    end
+    redirect '/profile'
+  end
+
+
+
 end

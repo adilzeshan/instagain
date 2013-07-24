@@ -2,7 +2,7 @@
 <div class="row">
   <div class="span4">
     <div class="bs-docs">
-      <h2>My feed</h2>
+      <h3>My feed</h3>
       <!-- <h2><%= @myphotos.map{|photo| photo.user.user_name.inspect} %></h2> -->
       <% @myphotos.first(5).each do |photo| %>
               <a href="#"><img class="img-polaroid" data-user="<%= photo.user.user_name %>" src="<%= "/images/photos/"+photo.id.to_s+"/medium/"+photo.photo_file_name %>" alt="<%= photo.photo_file_name %>"></a>
@@ -14,12 +14,12 @@
 
   <div class="span4">
     <div class="bs-docs">
-      <h2>Following</h2>
+      <h3>Following</h3>
       <% @followingphotos.first(5).each do |ph| %>
         <% ph.each do |photo| %>
         <div class="medium-photo" data-user="<%= photo.user.user_name %>">
           <a href="#"><img class="img-polaroid" src="<%= "/images/photos/"+photo.id.to_s+"/medium/"+photo.photo_file_name %>" alt="<%= photo.photo_file_name %>"></a>
-          <div class="label"><strong class="name">adil</strong><a class="follow" onclick="window.location.reload( true );" href="/follow/adil">follow</a><a class="profile" onclick="window.location.reload( true );" href="/profile/adil">profile</a></div>
+          <div class="label"><strong class="name"><%= photo.user.user_name %></strong><a class="follow" onclick="window.location.reload( true );" href="/unfollow/<%= photo.user.user_name %>">unfollow</a><a class="profile" onclick="window.location.reload( true );" href="/profile/<%= photo.user.user_name %>">details</a></div>
          </div>
 
         <% end %>
@@ -39,12 +39,12 @@
     </div>
     <div class="span3">
       <div class="bs-docs">
-        <h2 class="text-info" >Not Following:</h2>
+        <h3 class="text-info" >Not Following:</h3>
         <div id="templist">
          <ul class="unstyled">
           <% @not_following.each do |user| %>
-            <li><%= user %> - 
-             <a onClick="window.location.reload( true );" href="/follow/<%= user %>">follow</a> 
+            <li><%= user %> -
+             <a onClick="window.location.reload( true );" href="/follow/<%= user %>">follow</a>
              <a onClcik="window.location.reload( true );" href="/profile/<%= user %>">details</a>
             </li>
           <% end %>
@@ -54,7 +54,7 @@
     </div>
     <div class="span3">
       <div class="bs-docs">
-        <h2 class="text-info" >Following:</h2>
+        <h3 class="text-info" >Following:</h3>
         <ul class ="unstyled">
         <% @following.each do |user| %>
           <li><%= user %> -
@@ -66,13 +66,13 @@
     </div>
     <div class="span3">
       <div class="bs-docs">
-        <h2 class="text-info">Followers:</h2>
+        <h3 class="text-info">Followers:</h3>
         <ul class="unstyled">
         <% @followed.each do |user| %>
-            <li><%=user %> - 
+            <li><%=user %> -
               <a  onClick="window.location.reload( true);" href="profile/<%= user %>">details</a>
             </li>
-          <% end %>        
+          <% end %>
         </ul>
       </div>
     </div>

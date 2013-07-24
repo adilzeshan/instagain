@@ -2,7 +2,7 @@
 <div class="row">
   <div class="span4">
     <div class="bs-docs">
-      <h2><%=@other_user_name+"\'s"%> feed</h2>
+      <h3><%=@other_user_name+"\'s"%> feed</h3>
       <% @their_photos.first(5).each do |photo| %>
         <a href="#"><img class="img-polaroid" src="<%= "/images/photos/"+photo.id.to_s+"/medium/"+photo.photo_file_name %>" alt="<%= photo.photo_file_name %>"></a>
       <% end %>
@@ -25,7 +25,7 @@
     </div> -->
     <div class="span3">
       <div class="bs-docs">
-        <h2 class="text-info" >Not Following:</h2>
+        <h3 class="text-info" >Not Following:</h3>
         <div id="templist">
         <ul>
           <% @not_following.each do |user| %>
@@ -37,7 +37,7 @@
     </div>
     <div class="span3">
       <div class="bs-docs">
-        <h2 class="text-info" >Following:</h2>
+        <h3 class="text-info" >Following:</h3>
         <ul>
         <% @following.each do |user| %>
           <a href="#"><li><%= user %></li></a>
@@ -47,7 +47,7 @@
     </div>
     <div class="span3">
       <div class="bs-docs">
-        <h2 class="text-info">Followers:</h2>
+        <h3 class="text-info">Followers:</h3>
         <ul>
         <% @followed.each do |user| %>
         <a href="#"><li><%= user %></li></a>
