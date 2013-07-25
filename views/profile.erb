@@ -5,14 +5,17 @@
       <h3>My feed</h3>
       <% @myphotos.first(5).each do |photo| %>
       <div class="medium-photo" data-user="<%= photo.user.user_name %>">
-        <a href="#">
-          <img class="img-polaroid" data-user="<%= photo.user.user_name %>" src="<%= photo.photo.url(:medium) %>" alt="<%= photo.photo_file_name %>"></a>
+
+        <a id="single_<%= @myphotos.index(photo) %>" class="fancybox-button" rel="fancybox-button" href="<%= photo.photo.url(:medium) %>" title="<%= photo.user.user_name %> - <%= photo.photo_file_name[0...-4] %>">
+          <img class="img-polaroid" data-user="<%= photo.user.user_name %>" src="<%= photo.photo.url(:medium) %>" alt="<%= photo.photo_file_name %>">
+        </a>
 
         <div class="label labelbottom">
           <strong class="name"></strong>
           <a class="delete text-error text-delete" onclick="window.location.reload( true );" href="/delete/<%= photo.id %>"><strong>delete</strong></a>
           <a class="profile"></a>
         </div>
+
       </div>
       <% end %>
     </div>
@@ -24,9 +27,19 @@
       <% @followingphotos.first(5).each do |ph| %>
         <% ph.each do |photo| %>
         <div class="medium-photo" data-user="<%= photo.user.user_name %>">
-          <a href="#"><img class="img-polaroid" src="<%= photo.photo.url(:medium) %>" alt="<%= photo.photo_file_name %>"></a>
 
-          <div class="label labelbottom"><strong class="name"><%= photo.user.user_name %></strong><a class="follow" onclick="window.location.reload( true );" href="/unfollow/<%= photo.user.user_name %>">unfollow</a><a class="profile" onclick="window.location.reload( true );" href="/profile/<%= photo.user.user_name %>">profile</a></div>
+
+          <a id="single_<%= @followingphotos.index(photo) %>" class="fancybox-button" rel="fancybox-button" href="<%= photo.photo.url(:medium) %>" title="<%= photo.user.user_name %> - <%= photo.photo_file_name[0...-4] %>">
+          <img class="img-polaroid" data-user="<%= photo.user.user_name %>" src="<%= photo.photo.url(:medium) %>" alt="<%= photo.photo_file_name %>">
+          </a>
+
+
+        <!-- <img class="img-polaroid" src="<%= photo.photo.url(:medium) %>" alt="<%= photo.photo_file_name %>"></a> -->
+
+          <div class="label labelbottom">
+            <strong class="name"><%= photo.user.user_name %></strong>
+            <a class="follow" onclick="window.location.reload( true );" href="/unfollow/<%= photo.user.user_name %>">unfollow</a>
+            <a class="profile" onclick="window.location.reload( true );" href="/profile/<%= photo.user.user_name %>">profile</a></div>
          </div>
 
         <% end %>
