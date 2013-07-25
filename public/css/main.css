@@ -8,15 +8,29 @@
    top:0;
    left:0;
 }
-.label{
+
+.labelbottom{
   top: -20px;
   margin-bottom:-20px;
   width:100%;
 }
-.label > * {
+.labelbottom > * {
 display: inline-block;
 width: 33%;
 }
+
+.labelbottom {
+  visibility: hidden;
+  opacity:0.8;
+  filter:alpha(opacity=70); /* For IE8 and earlier */
+  background-color: #000
+}
+
+.medium-photo:hover .labelbottom {
+    visibility: visible;
+}
+
+
 strong.name{
   text-align:left;
 
@@ -24,6 +38,9 @@ strong.name{
 a.follow{
   text-align:center;
 
+}
+a.delete{
+  text-align:center;
 }
 a.profile{
   text-align:right;
@@ -36,15 +53,23 @@ a.profile{
     margin-bottom: 20px;
 }
 
+.other{
+  width:45%;
+}
+
 .medium-photo > a {
   display: block;
   margin-bottom: -20px;
 }
 
-.label {
-  visibility: hidden;
-}
 
-.medium-photo:hover .label {
-    visibility: visible;
+
+.text-delete
+{
+color: red;
+
+}
+.warning
+{
+display: none;
 }
