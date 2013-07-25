@@ -12,6 +12,10 @@ GEM
       tzinfo (~> 0.3.37)
     addressable (2.3.5)
     atomic (1.1.10)
+    aws (2.9.1)
+      http_connection
+      uuidtools
+      xml-simple
     bcrypt-ruby (3.1.1)
     builder (3.1.4)
     climate_control (0.0.3)
@@ -74,6 +78,7 @@ GEM
       data_objects (= 0.10.13)
     extlib (0.9.16)
     fastercsv (1.5.5)
+    http_connection (1.4.4)
     i18n (0.6.4)
     json (1.8.0)
     json_pure (1.8.0)
@@ -85,6 +90,9 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.0)
       mime-types
+    rack (1.5.2)
+    rack-protection (1.5.0)
+      rack
     rmagick (2.13.2)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
@@ -101,13 +109,16 @@ GEM
     stringex (1.5.1)
     thread_safe (0.1.2)
       atomic
+    tilt (1.4.1)
     tzinfo (0.3.37)
     uuidtools (2.1.4)
+    xml-simple (1.1.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  aws
   data_mapper
   dm-paperclip
   dm-postgres-adapter
