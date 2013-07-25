@@ -39,7 +39,7 @@
     </div>
     <div class="span3">
       <div class="bs-docs">
-        <h3 class="text-info" >Not Following:</h3>
+        <h3 class="text-info" >Sudgestions:</h3>
         <div id="templist">
          <ul class="unstyled">
           <% @not_following.each do |user| %>
@@ -58,6 +58,7 @@
         <ul class ="unstyled">
         <% @following.each do |user| %>
           <li><%= user %> -
+            <a onClick="window.location.reload( true );" href="/unfollow/<%= user %>">unfollow</a>
              <a onClick="window.location.reload( true );"href="/profile/<%= user %>">details</a>
           </li>
         <% end %>
