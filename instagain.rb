@@ -120,14 +120,44 @@ class Instagain <Sinatra::Base
   end
 
   post '/signup' do
+
+    first_name_input = params[:first_name]
+    last_name_input = params[:last_name]
+    user_name_input = params[:user_name]
+    email_input = params[:email_address]
+    password_input = params[:password]
+
+
+    if first_name_input.length < 4
+      return "Your first name is too short. Sorry."
+    end
+
+    if last_name_input.length < 4
+      return "your last name is too short. Sorry."
+    end
+
+    if user_name_input.length < 6
+      return "Your username is too short."
+    end
+
+    if !email_input.include?('@') || !email_input.include?('.')
+      return "Your email doesn't look normal..."
+    end
+
+    if password_input.length < 6 
+      return "You need a longer password."
+    end
+
     @user = User.create({
-                        first: params[:first_name],
-                        last: params[:last_name],
-                        user_name: params[:user_name],
-                        email: params[:email_address],
-                        password: params[:password]
+                        first: first_name_input,
+                        last: last_name_input,
+                        user_name: user_name_input,
+                        email: email_input,
+                        password: password_input
                         })
-    redirect '/signin'
+
+    content_type :json
+    return {success: true}.to_json if @user
   end
 
   get '/users' do

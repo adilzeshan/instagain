@@ -99,26 +99,6 @@
 </div>
 <script>
 
-var flashWarning = function(){
-$('.warning').slideDown(function() {
-    setTimeout(function() {
-        $('.warning').slideUp();
-    }, 2000);
-});
-}
-
-
-$('#profileForm').submit(function(){
-
-    $.post($(this).attr('/profile'), $(this).serialize(), function(res){
-        // Do something with the response `res`
-        flashWarning();
-        // Don't forget to hide the loading indicator!
-    });
-
-    return false; // prevent default action
-
-});
 
 
 //flashWarning
