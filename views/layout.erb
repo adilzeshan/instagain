@@ -17,9 +17,44 @@
     <link rel="stylesheet" type="text/css" href="/css/style.css" />
     <link rel="stylesheet" type="text/css" href="/css/main.css" />
     <script type="text/javascript" src="/js/modernizr.custom.26633.js"></script>
+
+    <!-- Add fancyBox -->
+    <link rel="stylesheet" href="/css/jquery.fancybox.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="/js/jquery.fancybox.pack.js"></script>
+
+    <!-- Optionally add helpers - button, thumbnail and/or media -->
+    <link rel="stylesheet" href="/css/jquery.fancybox-buttons.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="/js/jquery.fancybox-buttons.js"></script>
+    <script type="text/javascript" src="/js/jquery.fancybox-media.js"></script>
+
+    <link rel="stylesheet" href="/css/jquery.fancybox-thumbs.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="/js/jquery.fancybox-thumbs.js"></script>
+
+
+
+    <script>
+      $(document).ready(function() {
+        $(".fancybox-button").fancybox({
+            prevEffect  : 'none',
+            nextEffect  : 'none',
+              helpers: {
+                  title : {
+                      type : 'float'
+                  },
+                overlay : {
+                css : {
+                'background' : 'rgba(0, 0, 0, 0.80)'
+                  }
+                }
+              }
+          });
+        });
+
+    </script>
+
     <noscript>
       <link rel="stylesheet" type="text/css" href="/css/fallback.css" />
-    </noscript
+    </noscript>
   </head>
   <body>
     <div class="container">
