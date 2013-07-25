@@ -3,48 +3,37 @@
   <div class="span8">
     <div class="bs-docs">
       <h3><%=@other_user_name+"\'s"%> feed</h3>
+
       <div class="others-feed">
-      <% @their_photos.first(10).each do |photo| %>
-      <div class="medium-photo other" data-user="<%= photo.user.user_name %>">
-        <a href="#"><img class="img-polaroid" src="<%= photo.photo.url(:medium) %>" alt="<%= photo.photo_file_name %>"></a>
-       <div class="label">
-        <strong class="name"><%= photo.user.user_name %></strong>
-        <a class="follow" onclick="window.location.reload( true );" href="/follow/<%= photo.user.user_name %>">follow</a>
-        <a class="profile" onclick="window.location.reload( true );" href="/profile/<%= photo.user.user_name %>">details</a></div>
+        <div class="span7 left">
+        <% @their_photos.all.each do |photo| %>
+        <div class="medium-photo other" data-user="<%= photo.user.user_name %>">
+          <a href="#"><img class="img-polaroid" src="<%= photo.photo.url(:medium) %>" alt="<%= photo.photo_file_name %>">
+            <noscript><img src="<%= photo.photo.url(:medium) %>" alt="<%= photo.photo_file_name %>" ></noscript></a>
+         <div class="label labelbottom">
+          <strong class="name"><%= photo.user.user_name %></strong>
+          <a class="follow" onclick="window.location.reload( true );" href="/follow/<%= photo.user.user_name %>">follow</a>
+          <a class="profile" onclick="window.location.reload( true );" href="/profile/<%= photo.user.user_name %>">details</a></div>
+        </div>
+        <% end %>
       </div>
-      <% end %>
-    </div>
-
-
-    <div class="others-feed">
-      <% @their_photos.last(10).each do |photo| %>
-      <div class="medium-photo other" data-user="<%= photo.user.user_name %>">
-        <a href="#"><img class="img-polaroid" src="<%= photo.photo.url(:medium) %>" alt="<%= photo.photo_file_name %>"></a>
-       <div class="label">
-        <strong class="name"><%= photo.user.user_name %></strong>
-        <a class="follow" onclick="window.location.reload( true );" href="/follow/<%= photo.user.user_name %>">follow</a>
-        <a class="profile" onclick="window.location.reload( true );" href="/profile/<%= photo.user.user_name %>">profile</a></div>
-      </div>
-      <% end %>
-    </div>
-
-
-
+<!--       <div class="span3 right">
+        <% @their_photos.last(10).all.reverse.each do |photo| %>
+        <div class="medium-photo other" data-user="<%= photo.user.user_name %>">
+          <a href="#">
+            <img class="img-polaroid lazy" src="/images/grey.gif" data-original="<%= photo.photo.url(:medium) %>" alt="<%= photo.photo_file_name %>"></a>
+         <div class="label">
+          <strong class="name"><%= photo.user.user_name %></strong>
+          <a class="follow" onclick="window.location.reload( true );" href="/follow/<%= photo.user.user_name %>">follow</a>
+          <a class="profile" onclick="window.location.reload( true );" href="/profile/<%= photo.user.user_name %>">profile</a></div>
+        </div>
+        <% end %>
+      </div> -->
 
     </div>
   </div>
-
-  <div class="span3">
-<!--     <div class="span3">
-      <div class="bs-docs">
-        <form action='/profile/<%= @usernm %>' class="form-signin" method="POST">
-          <input type="text" id="firstname" class="input-block-level" value="<%= @first %>" name="first_name">
-          <input type="text" id="lastname"  class="input-block-level" value=<%= @last %> name = "last_name">
-          <input type="text" id="email"  class="input-block-level" value=<%= @email %> name = "email_address">
-          <button class="btn btn-large btn-primary" type="submit">Update</button>
-        </form>
-      </div>
-    </div> -->
+  </div>
+  <div class="span4">
     <div class="span3">
       <div class="bs-docs">
         <h4 class="text-info" >You are not following:</h4>
@@ -81,6 +70,7 @@
 
 
 <script>
+
 // Create the label for the photos
 
 //   // @myphotos.map{|photo| photo.user.user_name.inspect}

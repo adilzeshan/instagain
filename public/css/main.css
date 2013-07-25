@@ -1,3 +1,6 @@
+body{
+background-color: #FAFAFA;
+}
 #main {
     width:256px;
     height:256px;
@@ -54,7 +57,17 @@ a.profile{
 }
 
 .other{
-  width:45%;
+  /*width:45%;*/
+
+}
+.left{
+  /*width:45%;*/
+  float:left;
+}
+.right{
+  /*width:45%;*/
+  float:right;
+  padding-right:25px;
 }
 
 .medium-photo > a {
@@ -73,3 +86,16 @@ color: red;
 {
 display: none;
 }
+
+.others-feed{
+  height:550px;
+   overflow: scroll;
+
+}
+.my-feed{
+  height:550px;
+   overflow: scroll;
+
+}
+
+

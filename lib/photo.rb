@@ -10,12 +10,12 @@ class Photo
                       # :path => "#{APP_ROOT}/public/images/:attachment/:id/:style/:basename.:extension",
                       # :styles => { :medium => "250x250>",
                       #            :thumb => "118x118>" }
-                      :styles => { :medium => "800x800^",
+                      :styles => { :medium => "400x400^",
                                  :thumb => "118x118^"
                                  },
                       :convert_options => {
                                             thumb: " -gravity center -crop '118x118+0+0'",
-                                            medium: " -gravity center -crop '800x800+0+0'"
+                                            medium: " -gravity center -crop '400x400+0+0'"
                                           },
                     :storage          => :s3,
                     :s3_credentials   => {
