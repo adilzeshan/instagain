@@ -26,7 +26,7 @@
         <div class="medium-photo" data-user="<%= photo.user.user_name %>">
           <a href="#"><img class="img-polaroid" src="<%= "/images/photos/"+photo.id.to_s+"/medium/"+photo.photo_file_name %>" alt="<%= photo.photo_file_name %>"></a>
 
-          <div class="label labelbottom"><strong class="name"><%= photo.user.user_name %></strong><a class="follow" onclick="window.location.reload( true );" href="/unfollow/<%= photo.user.user_name %>">unfollow</a><a class="profile" onclick="window.location.reload( true );" href="/profile/<%= photo.user.user_name %>">details</a></div>
+          <div class="label labelbottom"><strong class="name"><%= photo.user.user_name %></strong><a class="follow" onclick="window.location.reload( true );" href="/unfollow/<%= photo.user.user_name %>">unfollow</a><a class="profile" onclick="window.location.reload( true );" href="/profile/<%= photo.user.user_name %>">profile</a></div>
          </div>
 
         <% end %>
@@ -49,7 +49,7 @@
     </div>
     <div class="span3">
       <div class="bs-docs">
-        <h3 class="text-info" >Sudgestions:</h3>
+        <h4 class="text-info" >You are not following:</h4>
         <div id="templist">
          <ul class="unstyled">
           <% @not_following.each do |user| %>
@@ -64,7 +64,7 @@
     </div>
     <div class="span3">
       <div class="bs-docs">
-        <h3 class="text-info" >Following:</h3>
+        <h4 class="text-info" >Following:</h4>
         <ul class ="unstyled">
         <% @following.each do |user| %>
           <li><%= user %> -
@@ -77,7 +77,7 @@
     </div>
     <div class="span3">
       <div class="bs-docs">
-        <h3 class="text-info">Followers:</h3>
+        <h4 class="text-info">Followers:</h4>
         <ul class="unstyled">
         <% @followed.each do |user| %>
             <li><%=user %> -

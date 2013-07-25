@@ -10,7 +10,7 @@
        <div class="label">
         <strong class="name"><%= photo.user.user_name %></strong>
         <a class="follow" onclick="window.location.reload( true );" href="/follow/<%= photo.user.user_name %>">follow</a>
-        <a class="profile" onclick="window.location.reload( true );" href="/profile/<%= photo.user.user_name %>">details</a></div>
+        <a class="profile" onclick="window.location.reload( true );" href="/profile/<%= photo.user.user_name %>">profile</a></div>
       </div>
       <% end %>
     </div>
@@ -23,7 +23,7 @@
        <div class="label">
         <strong class="name"><%= photo.user.user_name %></strong>
         <a class="follow" onclick="window.location.reload( true );" href="/follow/<%= photo.user.user_name %>">follow</a>
-        <a class="profile" onclick="window.location.reload( true );" href="/profile/<%= photo.user.user_name %>">details</a></div>
+        <a class="profile" onclick="window.location.reload( true );" href="/profile/<%= photo.user.user_name %>">profile</a></div>
       </div>
       <% end %>
     </div>
@@ -47,11 +47,14 @@
     </div> -->
     <div class="span3">
       <div class="bs-docs">
-        <h3 class="text-info" >Not Following:</h3>
+        <h4 class="text-info" >You are not following:</h4>
         <div id="templist">
-        <ul>
+        <ul class="unstyled">
           <% @not_following.each do |user| %>
-            <a onClick="window.location.reload( true );" href="/follow/<%= user %>"><li><%= user %></li></a>
+             <li><%= user %> -
+                 <a onClick="window.location.reload( true );" href="/follow/<%= user %>">follow</a>
+                 <a onClcik="window.location.reload( true );" href="/profile/<%= user %>">details</a>
+            </li>
           <% end %>
         </ul>
         </div>
@@ -59,21 +62,27 @@
     </div>
     <div class="span3">
       <div class="bs-docs">
-        <h3 class="text-info" >Following:</h3>
-        <ul>
+        <h4 class="text-info" ><%=@other_user_name+"\'s"%> following:</h4>
+         <ul class ="unstyled">
         <% @following.each do |user| %>
-          <a href="#"><li><%= user %></li></a>
+          <li><%= user %> -
+            <a onClick="window.location.reload( true );" href="/unfollow/<%= user %>">unfollow</a>
+             <a onClick="window.location.reload( true );"href="/profile/<%= user %>">details</a>
+          </li>
         <% end %>
         </ul>
       </div>
     </div>
     <div class="span3">
       <div class="bs-docs">
-        <h3 class="text-info">Followers:</h3>
-        <ul>
+        <h4 class="text-info"><%=@other_user_name+"\'s"%> followers:</h4>
+        <ul class="unstyled">
         <% @followed.each do |user| %>
-        <a href="#"><li><%= user %></li></a>
-      <% end %>        </ul>
+         <li><%=user %> -
+              <a  onClick="window.location.reload( true);" href="/profile/<%= user %>">details</a>
+            </li>
+          <% end %>       
+      </ul>
       </div>
     </div>
   </div>
