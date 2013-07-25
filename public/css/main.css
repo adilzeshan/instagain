@@ -89,12 +89,12 @@ display: none;
 
 .others-feed{
   height:550px;
-   overflow: scroll;
+   overflow-x:scroll;
 
 }
 .my-feed{
   height:550px;
-   overflow: scroll;
+   overflow-x: scroll;
 
 }
 
