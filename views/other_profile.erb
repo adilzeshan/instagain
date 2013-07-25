@@ -6,7 +6,7 @@
       <div class="others-feed">
       <% @their_photos.first(10).each do |photo| %>
       <div class="medium-photo other" data-user="<%= photo.user.user_name %>">
-        <a href="#"><img class="img-polaroid" src="<%= "/images/photos/"+photo.id.to_s+"/medium/"+photo.photo_file_name %>" alt="<%= photo.photo_file_name %>"></a>
+        <a href="#"><img class="img-polaroid" src="<%= photo.photo.url(:medium) %>" alt="<%= photo.photo_file_name %>"></a>
        <div class="label">
         <strong class="name"><%= photo.user.user_name %></strong>
         <a class="follow" onclick="window.location.reload( true );" href="/follow/<%= photo.user.user_name %>">follow</a>
@@ -19,7 +19,7 @@
     <div class="others-feed">
       <% @their_photos.last(10).each do |photo| %>
       <div class="medium-photo other" data-user="<%= photo.user.user_name %>">
-        <a href="#"><img class="img-polaroid" src="<%= "/images/photos/"+photo.id.to_s+"/medium/"+photo.photo_file_name %>" alt="<%= photo.photo_file_name %>"></a>
+        <a href="#"><img class="img-polaroid" src="<%= photo.photo.url(:medium) %>" alt="<%= photo.photo_file_name %>"></a>
        <div class="label">
         <strong class="name"><%= photo.user.user_name %></strong>
         <a class="follow" onclick="window.location.reload( true );" href="/follow/<%= photo.user.user_name %>">follow</a>

@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'json'
 require 'dm-paperclip'
+require 'aws/s3'
 
 APP_ROOT = File.expand_path(File.dirname(__FILE__))
 
@@ -222,6 +223,17 @@ class Instagain <Sinatra::Base
     @photo.save
     halt 409, "There were some errors processing your request...\n#{@photo.errors.inspect}" unless @photo.save
     redirect '/profile'
+
+    # AWS::S3::Base.establish_connection!(
+    #   :access_key_id     => 'AKIAJOKTYMMDVLS3DDMQ',
+    #   :secret_access_key => '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'
+    # )
+    # AWS::S3::S3Object.store(
+    #   params[:photo][:filename],
+    #   params[:photo][:tempfile].read,
+    #   'instagain'
+  #)
+
   end
 
   get '/follow/:user' do

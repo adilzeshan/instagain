@@ -12,7 +12,7 @@
             <% if @logged_in == true %>
             <a href="<%= '/profile/'+photo.user.user_name %>">
             <% end %>
-              <img src="<%= "/images/photos/"+photo.id.to_s+"/thumb/"+photo.photo_file_name %>" alt="<%= photo.photo_file_name %>">
+              <img src="<%= photo.photo.url(:thumb) %>" alt="<%= photo.photo_file_name %>">
             </a>
           </li>
         <% end %>
