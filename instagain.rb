@@ -155,7 +155,8 @@ class Instagain <Sinatra::Base
   end
 
   post '/profile' do
-    @user = User.update({
+    @user = get_db_user
+    @user.update({
       first: params[:first_name],
       last: params[:last_name],
       email: params[:email_address]
@@ -168,12 +169,13 @@ class Instagain <Sinatra::Base
     @logged_in = login?
     if @logged_in != false
       @name = get_db_user.get_full_name
+      #puts @name.inspect
     end
     @first =  get_db_user.first
     @last = get_db_user.last
     @usernm = session[:user_name]
     @email = get_db_user.email
-    @myphotos = get_user_photos(session[:user])
+    @myphotos = get_user_photos(get_db_user)#   session[:user])
     @followingphotos = get_following_users_photos
     #puts get_all_following_users
     @following = get_all_following_user_names
@@ -188,10 +190,10 @@ class Instagain <Sinatra::Base
       redirect '/profile'
     end
 
-    @title = "#{@other_user_name}'s profile"
+    # @title = "#{@other_user_name}'s profile"
     @logged_in = login?
     if @logged_in != false
-      @name = session[:user].get_full_name
+      @name = get_db_user.get_full_name
     end
     # @first =  User.first(user_name: @other_user_name)
     # @last = User.last(user_name: @other_user_name)
