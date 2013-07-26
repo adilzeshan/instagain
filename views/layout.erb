@@ -102,7 +102,7 @@ $('#profileForm').submit(function(){
 
     $.post($(this).attr('/profile'), $(this).serialize(), function(res){
         // Do something with the response `res`
- 
+
         flashWarning();
         // Don't forget to hide the loading indicator!
     });

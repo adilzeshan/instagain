@@ -11,6 +11,8 @@
           <li>
             <% if @logged_in == true %>
             <a href="<%= '/profile/'+photo.user.user_name %>">
+            <% else %>
+            <a>
             <% end %>
               <img src="<%= photo.photo.url(:thumb) %>" alt="<%= photo.photo_file_name %>">
             </a>
