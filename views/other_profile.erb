@@ -56,7 +56,7 @@
 
 
            <li><%= user %> -
-            <a onClick="window.location.reload( true );" href="/unfollow/<%= user %>">unfollow</a>
+            <a onClick="window.location.reload( true );" href="/follow/<%= user %>">follow</a>
              <a onClick="window.location.reload( true );"href="/profile/<%= user %>">details</a>
           </li>
 
@@ -75,6 +75,7 @@
         <% @followed.each do |user| %>
 
           <li><%=user %> -
+            <a onClick="window.location.reload( true );" href="/follow/<%= user %>">follow</a>
               <a  onClick="window.location.reload( true);" href="/profile/<%= user %>">details</a>
             </li>
 
