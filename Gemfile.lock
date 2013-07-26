@@ -119,8 +119,10 @@ PLATFORMS
 DEPENDENCIES
   aws-s3
   data_mapper
+  dm-core
   dm-paperclip
   dm-postgres-adapter
+  dm-validations
   json
   paperclip
   rmagick

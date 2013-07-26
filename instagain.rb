@@ -1,6 +1,9 @@
 require 'sinatra'
 require 'json'
+require 'dm-core'
 require 'dm-paperclip'
+require 'dm-validations'
+
 require 'aws/s3'
 
 APP_ROOT = File.expand_path(File.dirname(__FILE__))

@@ -58,7 +58,7 @@ a.profile{
 
 .other{
   /*width:45%;*/
-
+  width: 400px;
 }
 .left{
   /*width:45%;*/
@@ -99,5 +99,7 @@ display: none;
    overflow-x: hidden;
 
 }
-
+.title{
+padding-left:20px;
+}
 

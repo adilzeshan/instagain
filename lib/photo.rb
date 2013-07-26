@@ -3,13 +3,10 @@ class Photo
   include Paperclip::Resource
 
     property          :id,                    Serial
-    belongs_to :user
 
+    belongs_to         :user
     has_attached_file :photo,
-                      #:path => "/:attachment/:id/:style/:basename.:extension",
-                      # :path => "#{APP_ROOT}/public/images/:attachment/:id/:style/:basename.:extension",
-                      # :styles => { :medium => "250x250>",
-                      #            :thumb => "118x118>" }
+
                       :styles => {  :big => "800x",
                                     :medium => "400x400^",
                                     :thumb => "118x118^"
@@ -26,4 +23,6 @@ class Photo
                     },
                     :path => ":attachment/:id/:style/:basename.:extension",
                     :url => "/:attachment/:id/:style/:basename.:extension"
+
+
 end

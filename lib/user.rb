@@ -4,6 +4,7 @@ class User
   attr :id,:first,:last,:user_name,:email
 
   include DataMapper::Resource
+
   property :id,                     Serial
   property :first,                  String, :required => true
   property :last,                   String, :required => true
