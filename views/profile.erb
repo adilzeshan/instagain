@@ -6,10 +6,10 @@
 
       <div class="my-feed">
         <div class="span3 left">
-          <% @myphotos.first(5).each do |photo| %>
+          <% @myphotos.each do |photo| %>
           <div class="medium-photo" data-user="<%= photo.user.user_name %>">
 
-              <a id="single_<%= @myphotos.index(photo) %>" class="fancybox-button" rel="fancybox-button" href="<%= photo.photo.url(:medium) %>" title="<%= photo.user.user_name %> - <%= photo.photo_file_name[0...-4] %>">
+              <a id="single_<%= @myphotos.index(photo) %>" class="fancybox-button" rel="fancybox-button" data-thumbnail="<%= photo.photo.url(:medium) %>" href="<%= photo.photo.url(:big) %>" title="<%= photo.user.user_name %> - <%= photo.photo_file_name[0...-4] %>">
 
               <img class="img-polaroid" data-user="<%= photo.user.user_name %>" src="<%= photo.photo.url(:medium) %>" alt="<%= photo.photo_file_name %>">
             </a>
@@ -34,11 +34,10 @@
 
       <div class="my-feed">
         <div class="span3 right">
-          <% @followingphotos.first(5).each do |ph| %>
-            <% ph.each do |photo| %>
+          <% @followingphotos.each do |photo| %>
             <div class="medium-photo" data-user="<%= photo.user.user_name %>">
-             
-                <a id="single_<%= @followingphotos.index(photo) %>" class="fancybox-button" rel="fancybox-button" href="<%= photo.photo.url(:medium) %>" title="<%= photo.user.user_name %> - <%= photo.photo_file_name[0...-4] %>">
+
+                <a id="single_<%= @followingphotos.index(photo) %>" class="fancybox-button" rel="fancybox-button" data-thumbnail="<%= photo.photo.url(:medium) %>" href="<%= photo.photo.url(:big) %>" title="<%= photo.user.user_name %> - <%= photo.photo_file_name[0...-4] %>">
 
 
                 <img class="img-polaroid" src="<%= photo.photo.url(:medium) %>" alt="<%= photo.photo_file_name %>"></a>
@@ -47,7 +46,6 @@
              </div>
 
 
-            <% end %>
       <% end %>
          </div>
     </div>

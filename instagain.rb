@@ -82,6 +82,7 @@ class Instagain <Sinatra::Base
       get_all_following_users.each do |user|
           @photos << Photo.all(user_id: user.id, :order => [ :photo_updated_at.desc ]  )
       end
+      @photos.flatten!.shuffle!
       @photos
     end
 
@@ -144,7 +145,7 @@ class Instagain <Sinatra::Base
       return "Your email doesn't look normal..."
     end
 
-    if password_input.length < 6 
+    if password_input.length < 6
       return "You need a longer password."
     end
 

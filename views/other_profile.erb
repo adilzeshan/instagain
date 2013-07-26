@@ -1,48 +1,29 @@
 
 <div class="row">
   <div class="span7">
-  <div class="span4">
+  <div class="span7">
     <div class="bs-docs">
       <h3><%=@other_user_name+"\'s"%> feed</h3>
 
       <div class="others-feed">
- <div class="span3 left">
-      <% @their_photos.first(10).each do |photo| %>
+ <div class="span6 left">
+      <% @their_photos.each do |photo| %>
       <div class="medium-photo other" data-user="<%= photo.user.user_name %>">
-      
 
-           <a id="single_<%= @other_user_name %>" class="fancybox-button" rel="fancybox-button" href="<%= photo.photo.url(:medium) %>" title="<%= photo.user.user_name %> - <%= photo.photo_file_name[0...-4] %>">
+
+           <a id="single_<%= @other_user_name %>" class="fancybox-button" rel="fancybox-button" data-thumbnail="<%= photo.photo.url(:medium) %>" href="<%= photo.photo.url(:big) %>" title="<%= photo.user.user_name %> - <%= photo.photo_file_name[0...-4] %>">
             <img class="img-polaroid" data-user="<%= photo.user.user_name %>" src="<%= photo.photo.url(:medium) %>" alt="<%= photo.photo_file_name %>">
                     </a>
 
-       <div class="label">
+       <div class="label labelbottom">
         <strong class="name"><%= photo.user.user_name %></strong>
         <a class="follow" onclick="window.location.reload( true );" href="/follow/<%= photo.user.user_name %>">follow</a>
         <a class="profile" onclick="window.location.reload( true );" href="/profile/<%= photo.user.user_name %>">details</a>
       </div>
       </div>
-      
+
       <% end %>
     </div>
-
-      <div class="others-feed">
-        <div class="span3 right">
-        <% @their_photos.all.each do |photo| %>
-        <div class="medium-photo other" data-user="<%= photo.user.user_name %>">
-         
-          <a href="#"><img class="img-polaroid" src="<%= photo.photo.url(:medium) %>" alt="<%= photo.photo_file_name %>">
-            <noscript><img src="<%= photo.photo.url(:medium) %>" alt="<%= photo.photo_file_name %>" ></noscript></a>
-         
-
-         <div class="label labelbottom">
-          <strong class="name"><%= photo.user.user_name %></strong>
-          <a class="follow" onclick="window.location.reload( true );" href="/follow/<%= photo.user.user_name %>">follow</a>
-          <a class="profile" onclick="window.location.reload( true );" href="/profile/<%= photo.user.user_name %>">details</a></div>
-        </div>
-        <% end %>
-      </div>
-
-</div>
     </div>
   </div>
   </div>
@@ -79,7 +60,7 @@
              <a onClick="window.location.reload( true );"href="/profile/<%= user %>">details</a>
           </li>
 
-          
+
 
 
         <% end %>
@@ -97,7 +78,7 @@
               <a  onClick="window.location.reload( true);" href="/profile/<%= user %>">details</a>
             </li>
 
-      <% end %>       
+      <% end %>
 
        </ul>
       </div>
