@@ -92,7 +92,7 @@ class Instagain <Sinatra::Base
        @photos =[]
        @photos = Photo.all(:order => [ :photo_file_name.desc ]  )
       if @photos.length > 0
-        @photos.flatten!.shuffle!
+        @photos.shuffle!
       end
       @photos
     end
