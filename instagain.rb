@@ -89,7 +89,11 @@ class Instagain <Sinatra::Base
     end
 
     def get_all_photos
-        Photo.all(:order => [ :photo_file_name.desc ]  )
+       @photos = Photo.all(:order => [ :photo_file_name.desc ]  )
+      if @photos.length > 0
+        @photos.flatten!.shuffle!
+      end
+      @photos
     end
 
     def make_paperclip_mash(file_hash)

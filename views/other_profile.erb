@@ -50,7 +50,7 @@
 
     <div class="span3">
       <div class="bs-docs">
-        <h4 class="text-info" >Following:</h4>
+        <h4 class="text-info" ><%=@other_user_name+"\'s"%> following:</h4>
           <ul class ="unstyled">
         <% @following.each do |user| %>
 
@@ -70,7 +70,7 @@
 
     <div class="span3">
       <div class="bs-docs">
-        <h4 class="text-info">Followers:</h4>
+        <h4 class="text-info"><%=@other_user_name+"\'s"%> followers:</h4>
         <ul class="unstyled">
         <% @followed.each do |user| %>
 
