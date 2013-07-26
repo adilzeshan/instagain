@@ -82,7 +82,9 @@ class Instagain <Sinatra::Base
       get_all_following_users.each do |user|
           @photos << Photo.all(user_id: user.id, :order => [ :photo_updated_at.desc ]  )
       end
-      @photos.flatten!.shuffle!
+      if @photos.length > 0
+        @photos.flatten!.shuffle!
+      end
       @photos
     end
 
@@ -137,7 +139,7 @@ class Instagain <Sinatra::Base
       return "your last name is too short. Sorry."
     end
 
-    if user_name_input.length < 6
+    if user_name_input.length < 5
       return "Your username is too short."
     end
 
