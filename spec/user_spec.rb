@@ -1,9 +1,7 @@
-require 'data_mapper'
-require_relative  '../lib/user.rb'
-require_relative   '../db/database.rb'
+require_relative './spec_helper'
 
 describe User do
-  before(:each) { DataMapper.finalize }
+  before(:each) { User.auto_migrate! }
   let (:user){User.new(first: 'Kips',last: 'Davenport',user_name: 'xyz123')}
 
   context 'user details' do

@@ -1,4 +1,4 @@
-require_relative  '../instagain.rb'
+require_realtive './spec_helper'
 
 describe Photo do
 
