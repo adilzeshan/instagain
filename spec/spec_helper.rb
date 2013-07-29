@@ -9,6 +9,7 @@ require_relative   '../lib/photo'
 RSpec.configure do |config|
   DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/test.db")
   DataMapper.finalize
+  DataMapper.auto_migrate!
   
   config.color = true
   config.formatter = :documentation
