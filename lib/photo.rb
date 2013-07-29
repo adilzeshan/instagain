@@ -17,8 +17,8 @@ class Photo
                                           },
                     :storage          => :s3,
                     :s3_credentials   => {
-                      :access_key_id      => 'AKIAJOKTYMMDVLS3DDMQ',
-                      :secret_access_key  => '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',
+                      :access_key_id      => ENV['S3_INSTAGAIN_ACCESS'],
+                      :secret_access_key  => ENV['S3_INSTAGAIN_SECRET'],
                       :bucket             => 'instagain2'
                     },
                     :path => ":attachment/:id/:style/:basename.:extension",
