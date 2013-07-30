@@ -3,7 +3,6 @@ require 'json'
 require 'dm-core'
 require 'dm-paperclip'
 require 'dm-validations'
-
 require 'aws/s3'
 
 APP_ROOT = File.expand_path(File.dirname(__FILE__))
@@ -11,6 +10,8 @@ APP_ROOT = File.expand_path(File.dirname(__FILE__))
 require_relative 'db/database.rb'
 require_relative 'lib/user.rb'
 require_relative 'lib/photo.rb'
+require_relative 'lib/filter.rb'
+
 
 DataMapper.finalize
 
@@ -259,6 +260,7 @@ class Instagain <Sinatra::Base
 
   post '/upload' do
     halt 409, "File seems to be emtpy" unless params[:photo][:tempfile].size > 0
+
     @photo = Photo.new(
             :photo => make_paperclip_mash(params[:photo]),
             :user_id => session[:user].id
@@ -278,6 +280,27 @@ class Instagain <Sinatra::Base
   #)
 
   end
+
+  get '/edit/:id' do
+    @title = "Image Edit"
+    @photo = get_user_photos(get_db_user).first(params[:id])
+    erb :edit
+  end
+
+  post '/editor' do
+    @photo = get_user_photos(get_db_user).first(params[:id])
+    @filter = params[:filter]
+    @border = params[:border]
+    if @filter != "nofilter"
+      Filter.apply_filter(@photo.photo.url,@filter)
+    end
+    if @border != "noborder"
+      Filter.apply_border(@photo.photo.url,@border)
+    end
+    erb :edit
+
+  end
+
 
   get '/follow/:user' do
     @followuser = User.first(user_name: params[:user])

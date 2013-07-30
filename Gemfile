@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'nokogiri'
 gem 'sinatra'
 gem 'rspec'
 gem 'capybara'
@@ -13,3 +14,4 @@ gem 'dm-core'
 gem 'dm-validations'
 gem 'dm-paperclip'
 gem 'aws-s3'
+gem 'fastimage'

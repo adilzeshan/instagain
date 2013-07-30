@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="span6">
+    <img src="<%= @photo.photo.url(:medium) %>" alt="<%= @photo.photo_file_name %>">
+  </div>
+  <div class="span6">
+    <form action='/editor' method="POST" id="editor"  class="editor">
+      <h2 class="form-signin-heading">Choose your filter...</h2><br/>
+      <input type="radio" name="filter" value="nofilter" checked>    None<br/>
+      <input type="radio" name="filter" value="nashville">    Nashville<br/>
+      <input type="radio" name="filter" value="gotham">    Gotham<br/>
+      <input type="radio" name="filter" value="toaster">    Toaster<br/>
+      <input type="radio" name="filter" value="lomo">    Lomo<br/>
+      <input type="radio" name="filter" value="kelvin">    Kelvin<br/>
+      <button class="btn btn-large btn-primary" type="submit">Apply</button>
+    </form>
+
+    <form action='/editor' method="POST" id="editor"  class="editor">
+      <h2 class="form-signin-heading">and border...</h2><br/>
+      <input type="radio" name="border" value="noborder" checked>    None<br/>
+      <input type="radio" name="border" value="grey">    Grey<br/>
+      <input type="radio" name="border" value="polaroid">    Polaroid<br/>
+      <input type="radio" name="border" value="messy">    Messy<br/>
+      <button class="btn btn-large btn-primary" type="submit">Apply</button>
+    </form>
+  </div>
+</div>
+
