@@ -1,55 +1,53 @@
 body{
-background-color: #FAFAFA;
+    background-color: #FAFAFA;
 }
 #main {
     width:256px;
     height:256px;
 }
 .overlay {
-  height:100px;
-   width:100px;
-   top:0;
-   left:0;
+    height:100px;
+    width:100px;
+    top:0;
+    left:0;
 }
 
 .labelbottom{
-  top: -20px;
-  margin-bottom:-20px;
-  width:100%;
+    top: -20px;
+    margin-bottom:-20px;
+    width:100%;
 }
 .labelbottom > * {
-display: inline-block;
-width: 33%;
+    display: inline-block;
+    width: 33%;
 }
 
 .labelbottom {
-  visibility: hidden;
-  opacity:0.8;
-  filter:alpha(opacity=70); /* For IE8 and earlier */
-  background-color: #000
+    visibility: hidden;
+    opacity:0.8;
+    filter:alpha(opacity=70); /* For IE8 and earlier */
+    background-color: #000
 }
 
 .medium-photo:hover .labelbottom {
     visibility: visible;
 }
 
-
 strong.name{
-  text-align:left;
-
+    text-align:left;
 }
+
 a.follow{
-  text-align:center;
-
+    text-align:center;
 }
+
 a.delete{
-  text-align:center;
+    text-align:center;
 }
+
 a.profile{
-  text-align:right;
-
+    text-align:right;
 }
-
 
 .medium-photo{
     opacity: .8;
@@ -57,49 +55,44 @@ a.profile{
 }
 
 .other{
-  /*width:45%;*/
-  width: 400px;
+    width: 400px;
 }
+
 .left{
-  /*width:45%;*/
-  float:left;
+    float:left;
 }
+
 .right{
-  /*width:45%;*/
-  float:right;
-  padding-right:25px;
+    float:right;
+    padding-right:25px;
 }
 
 .medium-photo > a {
-  display: block;
-  margin-bottom: -20px;
+    display: block;
+    margin-bottom: -20px;
 }
 
-
-
-.text-delete
-{
-color: red;
-
+.text-delete{
+    color: red;
 }
-.warning
-{
-display: none;
+
+.warning{
+    display: none;
 }
 
 .others-feed{
-  height:550px;
-  overflow:scroll;
-   overflow-x:hidden;
-
+    height:550px;
+    overflow:scroll;
+    overflow-x:hidden;
 }
+
 .my-feed{
-  height:550px;
-  overflow:scroll;
-   overflow-x: hidden;
-
+    height:550px;
+    overflow:scroll;
+    overflow-x: hidden;
 }
+
 .title{
-padding-left:20px;
+    padding-left:20px;
 }
 

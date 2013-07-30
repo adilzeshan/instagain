@@ -36,23 +36,52 @@ class User
     self.last = full_name.split[1]
   end
 
-  class Link
-
-  include DataMapper::Resource
-  storage_names[:default] = 'users_links'
-
-  belongs_to :follower, 'User', :key => true
-  belongs_to :followed, 'User', :key => true
+  def self.get_db_user(user)
+    first(user_name: user)
   end
 
+  def self.get_other_user(username)
+    first(user_name: username)
+  end
+
+  def get_all_users
+    #User.all.map(&:user_name)
+    all.map {|user| user }
+  end
+
+  def self.get_all_user_names
+    all.map {|user| user.user_name }
+  end
+
+  def get_all_following_users
+    followed_users.map {|user| user }
+  end
+
+  def get_all_following_user_names
+    followed_users.map {|user| user.user_name }
+  end
+
+  def get_all_followed_user_names
+    followers.map {|user| user.user_name }
+  end
+
+  def get_all_not_following_user_names
+    User.get_all_user_names - get_all_following_user_names - [self.user_name]
+  end
+
+# The link db object to join users/followers/following
+  class Link
+    include DataMapper::Resource
+
+    storage_names[:default] = 'users_links'
+
+    belongs_to :follower, 'User', :key => true
+    belongs_to :followed, 'User', :key => true
+  end
   has n, :links_to_followed_users, 'User::Link', :child_key => [:follower_id]
   has n, :links_to_followers, 'User::Link', :child_key => [:followed_id]
-
-  has n, :followed_users, self,
-    :through => :links_to_followed_users, :via => :followed
-
-  has n, :followers, self,
-    :through => :links_to_followers, :via => :follower
+  has n, :followed_users, self, :through => :links_to_followed_users, :via => :followed
+  has n, :followers, self, :through => :links_to_followers, :via => :follower
 
   def follow(others)
     followed_users.concat(Array(others))

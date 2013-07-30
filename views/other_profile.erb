@@ -1,126 +1,69 @@
 
 <div class="row">
   <div class="span7">
-  <div class="span7">
-    <div class="bs-docs">
-      <h3 class="title"><%=@other_user_name+"\'s"%> feed</h3>
-
-      <div class="others-feed">
- <div class="span6 left">
-      <% @their_photos.each do |photo| %>
-      <div class="medium-photo other" data-user="<%= photo.user.user_name %>">
-
-
-           <a id="single_<%= @other_user_name %>" class="fancybox-button" rel="fancybox-button" data-thumbnail="<%= photo.photo.url(:medium) %>" href="<%= photo.photo.url(:big) %>" title="<%= photo.user.user_name %> - <%= photo.photo_file_name[0...-4] %>">
-            <img class="img-polaroid" data-user="<%= photo.user.user_name %>" src="<%= photo.photo.url(:medium) %>" alt="<%= photo.photo_file_name %>">
-                    </a>
-
-       <div class="label labelbottom">
-        <strong class="name"><%= photo.user.user_name %></strong>
-        <a class="follow" onclick="window.location.reload( true );" href="/follow/<%= photo.user.user_name %>">follow</a>
-        <a class="profile" onclick="window.location.reload( true );" href="/profile/<%= photo.user.user_name %>">details</a>
-      </div>
-      </div>
-
-      <% end %>
-    </div>
-    </div>
-  </div>
-  </div>
-  </div>
-
-
-
-<div class="span4">
-     <div class="span3">
+    <div class="span7">
       <div class="bs-docs">
-        <h4 class="text-info" >You are not following:</h4>
-        <div id="templist">
-        <ul class="unstyled">
-          <% @not_following.each do |user| %>
-            <li><%= user %> -
-             <a onClick="window.location.reload( true );" href="/follow/<%= user %>">follow</a>
-             <a onClcik="window.location.reload( true );" href="/profile/<%= user %>">details</a>
-            </li>
-          <% end %>
-        </ul>
+        <h3 class="title"><%=@other_user_name+"\'s"%> feed</h3>
+        <div class="others-feed">
+          <div class="span6 left">
+            <% @their_photos.each do |photo| %>
+              <div class="medium-photo other" data-user="<%= photo.user.user_name %>">
+                <a id="single_<%= @other_user_name %>" class="fancybox-button" rel="fancybox-button" data-thumbnail="<%= photo.photo.url(:medium) %>" href="<%= photo.photo.url(:big) %>" title="<%= photo.user.user_name %> - <%= photo.photo_file_name[0...-4] %>">
+                  <img class="img-polaroid" data-user="<%= photo.user.user_name %>" src="<%= photo.photo.url(:medium) %>" alt="<%= photo.photo_file_name %>">
+                </a>
+                <div class="label labelbottom">
+                  <strong class="name"><%= photo.user.user_name %></strong>
+                  <a class="follow" onclick="window.location.reload( true );" href="/follow/<%= photo.user.user_name %>">follow</a>
+                  <a class="profile" onclick="window.location.reload( true );" href="/profile/<%= photo.user.user_name %>">details</a>
+                </div>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
-
+  </div>
+  <div class="span4">
+    <div class="span3">
+      <div class="bs-docs">
+        <h4 class="text-info" >You are not following:</h4>
+        <div id="templist">
+          <ul class="unstyled">
+          <% @not_following.each do |user| %>
+            <li><%= user %> -
+              <a onClick="window.location.reload( true );" href="/follow/<%= user %>">follow</a>
+              <a onClcik="window.location.reload( true );" href="/profile/<%= user %>">details</a>
+            </li>
+          <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
     <div class="span3">
       <div class="bs-docs">
         <h4 class="text-info" ><%=@other_user_name+"\'s"%> following:</h4>
-          <ul class ="unstyled">
-        <% @following.each do |user| %>
-
-
-           <li><%= user %> -
+        <ul class ="unstyled">
+          <% @following.each do |user| %>
+            <li><%= user %> -
             <a onClick="window.location.reload( true );" href="/follow/<%= user %>">follow</a>
-             <a onClick="window.location.reload( true );"href="/profile/<%= user %>">details</a>
-          </li>
-
-
-
-
-        <% end %>
+            <a onClick="window.location.reload( true );"href="/profile/<%= user %>">details</a>
+            </li>
+          <% end %>
         </ul>
       </div>
     </div>
-
     <div class="span3">
       <div class="bs-docs">
         <h4 class="text-info"><%=@other_user_name+"\'s"%> followers:</h4>
         <ul class="unstyled">
-        <% @followed.each do |user| %>
-
-          <li><%=user %> -
-            <a onClick="window.location.reload( true );" href="/follow/<%= user %>">follow</a>
+          <% @followed.each do |user| %>
+            <li><%=user %> -
+              <a onClick="window.location.reload( true );" href="/follow/<%= user %>">follow</a>
               <a  onClick="window.location.reload( true);" href="/profile/<%= user %>">details</a>
             </li>
-
-      <% end %>
-
-       </ul>
+          <% end %>
+        </ul>
       </div>
     </div>
   </div>
-  </div>
-
 </div>
-
-<script>
-
-// Create the label for the photos
-
-//   // @myphotos.map{|photo| photo.user.user_name.inspect}
-// var setLabel = function(){
-//   var user = $(this).data('user')
-
-//   var photoDivs = $('.medium-photo');
-//   var name = "<Strong class='name'>"+user+"</strong>";
-//   var follow = "<a class='follow' onClick='window.location.reload( true );' href='/follow/"+user+"'>follow</a>";
-//   var profile = "<a class='profile' onClick='window.location.reload( true );' href='/profile/"+user+"'>profile</a>";
-//   var label = "<div class='label'>"+name+follow+profile+"</div>"
-//   //console.log(follow)
-
-//   photoDivs.each(function(index, photo){
-//     $(photo).append(label);
-//   })
-// }
-// var removeLabel = function()
-// {
-//   var labels = $('.label');
-//   //console.log(labels)
-//   // labels.each(function(index, divie){
-//   //   divie.parentNode.removeChild(divie);
-//   // })
-//   labels.remove();
-// }
-
-// //jQuery(".medium-photo").on('mouseover', setLabel);
-// //jQuery(".medium-photo").one('mouseover', setLabel);
-// //jQuery(".medium-photo").on('mouseout', removeLabel);
-
-
-</script>

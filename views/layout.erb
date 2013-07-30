@@ -30,8 +30,6 @@
     <link rel="stylesheet" href="/css/jquery.fancybox-thumbs.css" type="text/css" media="screen" />
     <script type="text/javascript" src="/js/jquery.fancybox-thumbs.js"></script>
 
-
-
     <script>
       $(document).ready(function() {
         $(".fancybox-button").fancybox({
@@ -49,9 +47,7 @@
               }
           });
         });
-
     </script>
-
     <noscript>
       <link rel="stylesheet" type="text/css" href="/css/fallback.css" />
     </noscript>
@@ -87,56 +83,41 @@
     <script type="text/javascript" src="/js/jquery.gridrotator.js"></script>
     <script src="/js/jquery.lazyload.js" type="text/javascript"></script>
     <script type="text/javascript">
-
-
-var flashWarning = function(){
-$('.warning').slideDown(function() {
-    setTimeout(function() {
-        $('.warning').slideUp();
-    }, 2000);
-});
-}
-
-
-$('#profileForm').submit(function(){
-
-    $.post($(this).attr('/profile'), $(this).serialize(), function(res){
-        // Do something with the response `res`
-
-        flashWarning();
-        // Don't forget to hide the loading indicator!
-    });
-
-    return false; // prevent default action
-
-});
-$('#signup').submit(function(){
-
-    $.post($(this).attr('/signup'), $(this).serialize(), function(res){
-        // Do something with the response `res`
-
-        if(res['success']) {
-          window.location = '/signin'
-        } else {
-          var signinErrorElement = $('#error-box');
-          signinErrorElement.html(res);
-          flashWarning();
-        }
-        // Don't forget to hide the loading indicator!
-    });
-
-    return false; // prevent default action
-
-});
-
+      var flashWarning = function(){
+      $('.warning').slideDown(function() {
+          setTimeout(function() {
+              $('.warning').slideUp();
+          }, 2000);
+      });
+      }
+      $('#profileForm').submit(function(){
+          $.post($(this).attr('/profile'), $(this).serialize(), function(res){
+              flashWarning();
+          });
+          return false; // prevent default action
+      });
+      $('#signup').submit(function(){
+          $.post($(this).attr('/signup'), $(this).serialize(), function(res){
+              // Do something with the response `res`
+              if(res['success']) {
+                window.location = '/signin'
+              } else {
+                var signinErrorElement = $('#error-box');
+                signinErrorElement.html(res);
+                flashWarning();
+              }
+              // Don't forget to hide the loading indicator!
+          });
+          return false; // prevent default action
+      });
       $(function() {
-      $( '#ri-grid' ).gridrotator( {
-      rows: 1,
-      columns:1,
-      preventClick : false,
-      animType        : 'random',
-      onhover     : false
-      } );
+        $( '#ri-grid' ).gridrotator( {
+          rows: 1,
+          columns:1,
+          preventClick : false,
+          animType        : 'random',
+          onhover     : false
+        } );
       });
       $("img.lazy").lazyload({ threshold : 200, effect : "fadeIn", container: $(".others-feed") });
       $("img.lazy").lazyload({ threshold : 200, effect : "fadeIn", container: $(".my-feed") });

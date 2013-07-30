@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+group :development do
+  gem 'guard-rspec'
+  gem 'growl'
+end
 gem 'sinatra'
 gem 'rspec'
 gem 'capybara'
