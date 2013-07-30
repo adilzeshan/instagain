@@ -6,11 +6,11 @@
         <% @photos.each do |photo| %>
           <li>
             <% if @logged_in == true %>
-            <a href="<%= '/profile/'+photo.user.user_name %>">
+            <a href="<%= h '/profile/'+photo.user.user_name %>">
             <% else %>
             <a>
             <% end %>
-              <img src="<%= photo.photo.url(:thumb) %>" alt="<%= photo.photo_file_name %>">
+              <img src="<%= h photo.photo.url(:thumb) %>" alt="<%= h photo.photo_file_name %>">
             </a>
           </li>
         <% end %>

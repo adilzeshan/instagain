@@ -5,13 +5,13 @@
       <div class="my-feed">
         <div class="span3 left">
           <% @myphotos.each do |photo| %>
-            <div class="medium-photo" data-user="<%= photo.user.user_name %>">
-              <a id="single_<%= @myphotos.index(photo) %>" class="fancybox-button" rel="fancybox-button" data-thumbnail="<%= photo.photo.url(:medium) %>" href="<%= photo.photo.url(:big) %>" title="<%= photo.user.user_name %> - <%= photo.photo_file_name[0...-4] %>">
-                <img class="img-polaroid" data-user="<%= photo.user.user_name %>" src="<%= photo.photo.url(:medium) %>" alt="<%= photo.photo_file_name %>">
+            <div class="medium-photo" data-user="<%= h photo.user.user_name %>">
+              <a id="single_<%= h @myphotos.index(photo) %>" class="fancybox-button" rel="fancybox-button" data-thumbnail="<%= h photo.photo.url(:medium) %>" href="<%= h photo.photo.url(:big) %>" title="<%= h photo.user.user_name %> - <%= h photo.photo_file_name[0...-4] %>">
+                <img class="img-polaroid" data-user="<%= h photo.user.user_name %>" src="<%= h photo.photo.url(:medium) %>" alt="<%= h photo.photo_file_name %>">
               </a>
               <div class="label labelbottom">
                 <strong class="name"></strong>
-                <a class="delete text-error text-delete" onclick="window.location.reload( true );" href="/delete/<%= photo.id %>"><strong>delete</strong></a>
+                <a class="delete text-error text-delete" onclick="window.location.reload( true );" href="/delete/<%= h photo.id %>"><strong>delete</strong></a>
                 <a class="profile"></a>
               </div>
             </div>
@@ -26,14 +26,14 @@
       <div class="my-feed">
         <div class="span3 right">
           <% @followingphotos.each do |photo| %>
-            <div class="medium-photo" data-user="<%= photo.user.user_name %>">
-              <a id="single_<%= @followingphotos.index(photo) %>" class="fancybox-button" rel="fancybox-button" data-thumbnail="<%= photo.photo.url(:medium) %>" href="<%= photo.photo.url(:big) %>" title="<%= photo.user.user_name %> - <%= photo.photo_file_name[0...-4] %>">
-              <img class="img-polaroid" src="<%= photo.photo.url(:medium) %>" alt="<%= photo.photo_file_name %>">
+            <div class="medium-photo" data-user="<%= h photo.user.user_name %>">
+              <a id="single_<%= h @followingphotos.index(photo) %>" class="fancybox-button" rel="fancybox-button" data-thumbnail="<%= h photo.photo.url(:medium) %>" href="<%= h photo.photo.url(:big) %>" title="<%= h photo.user.user_name %> - <%= h photo.photo_file_name[0...-4] %>">
+              <img class="img-polaroid" src="<%= h photo.photo.url(:medium) %>" alt="<%= h photo.photo_file_name %>">
               </a>
               <div class="label labelbottom">
-                <strong class="name"><%= photo.user.user_name %></strong>
-                <a class="follow" onclick="window.location.reload( true );" href="/unfollow/<%= photo.user.user_name %>">unfollow</a>
-                <a class="profile" onclick="window.location.reload( true );" href="/profile/<%= photo.user.user_name %>">profile</a>
+                <strong class="name"><%= h photo.user.user_name %></strong>
+                <a class="follow" onclick="window.location.reload( true );" href="/unfollow/<%= h photo.user.user_name %>">unfollow</a>
+                <a class="profile" onclick="window.location.reload( true );" href="/profile/<%= h photo.user.user_name %>">profile</a>
               </div>
             </div>
           <% end %>
@@ -46,9 +46,9 @@
       <div class="bs-docs">
         <div class="profile">
           <form action='/profile' class="form-signin" method="POST" id="profileForm">
-            <input type="text" id="firstname" class="input-block-level" value="<%= @first %>" name="first_name">
-            <input type="text" id="lastname"  class="input-block-level" value=<%= @last %> name = "last_name">
-            <input type="text" id="email"  class="input-block-level" value=<%= @email %> name = "email_address">
+            <input type="text" id="firstname" class="input-block-level" value="<%= h @first %>" name="first_name">
+            <input type="text" id="lastname"  class="input-block-level" value=<%= h @last %> name = "last_name">
+            <input type="text" id="email"  class="input-block-level" value=<%= h @email %> name = "email_address">
             <button class="btn btn-large btn-primary" type="submit" onClick="">Update</button>
           </form>
           <div class="warning">
@@ -63,9 +63,9 @@
         <div id="templist">
           <ul class="unstyled">
             <% @not_following.each do |user| %>
-              <li><%= user %> -
-                <a onClick="window.location.reload( true );" href="/follow/<%= user %>">follow</a>
-                <a onClcik="window.location.reload( true );" href="/profile/<%= user %>">details</a>
+              <li><%= h user %> -
+                <a onClick="window.location.reload( true );" href="/follow/<%= h user %>">follow</a>
+                <a onClcik="window.location.reload( true );" href="/profile/<%= h user %>">details</a>
               </li>
             <% end %>
           </ul>
@@ -77,9 +77,9 @@
         <h4 class="text-info" >Following:</h4>
         <ul class ="unstyled">
           <% @following.each do |user| %>
-            <li><%= user %> -
-              <a onClick="window.location.reload( true );" href="/unfollow/<%= user %>">unfollow</a>
-              <a onClick="window.location.reload( true );"href="/profile/<%= user %>">details</a>
+            <li><%= h user %> -
+              <a onClick="window.location.reload( true );" href="/unfollow/<%= h user %>">unfollow</a>
+              <a onClick="window.location.reload( true );"href="/profile/<%= h user %>">details</a>
             </li>
           <% end %>
         </ul>
@@ -90,8 +90,8 @@
         <h4 class="text-info">Followers:</h4>
         <ul class="unstyled">
           <% @followed.each do |user| %>
-            <li><%=user %> -
-              <a  onClick="window.location.reload( true);" href="profile/<%= user %>">details</a>
+            <li><%= huser %> -
+              <a  onClick="window.location.reload( true);" href="profile/<%= h user %>">details</a>
             </li>
           <% end %>
         </ul>

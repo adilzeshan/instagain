@@ -27,6 +27,10 @@ class Instagain <Sinatra::Base
       end
     end
 
+    def h(text)
+      Rack::Utils.escape_html(text)
+    end
+
     def current_user
       User.first(user_name: session[:user_name])
     end

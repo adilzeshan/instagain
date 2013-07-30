@@ -25,3 +25,6 @@ class Photo
                       url:            '/:attachment/:id/:style/:basename.:extension'
 
 end
+
+#heroku config:set S3_ACCESS_INST=AKIAJOKTYMMDVLS3DDMQ
+#heroku config:set S3_SECRET_ACCESS_INST=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
