@@ -4,10 +4,10 @@ group :development do
   gem 'guard-rspec'
   gem 'growl'
   gem 'dm-sqlite-adapter'
+  gem 'rspec'
+  gem 'capybara'
 end
 gem 'sinatra'
-gem 'rspec'
-gem 'capybara'
 gem 'data_mapper'
 gem 'dm-postgres-adapter'
 gem 'json'
